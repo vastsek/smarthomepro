@@ -1,0 +1,55 @@
+---
+// Αρχείο: src/components/Footer.astro
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-10">
+            
+            <div class="text-center md:text-left flex flex-col items-center md:items-start">
+                
+                <div class="flex items-center gap-6 mb-6">
+                    <img 
+                        src="/images/SmartHomePro_Hor_W.png" 
+                        alt="SmartHomePro" 
+                        class="h-12 md:h-16 w-auto object-contain" 
+                    />
+                    
+                    <div class="w-px h-10 bg-slate-700"></div>
+
+                    <img 
+                        src="/images/knx_partner.png" 
+                        alt="KNX Partner" 
+                        class="h-8 md:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity brightness-0 invert" 
+                    />
+                </div>
+                
+                <p class="text-sm">
+                    &copy; {year} SmartHomePro. All rights reserved.
+                </p>
+            </div>
+
+            <div class="text-center">
+                <h4 class="text-white font-bold mb-4 uppercase tracking-wider text-sm">Επικοινωνια</h4>
+                <a href="tel:+302102200607" class="text-xl md:text-2xl font-bold text-white hover:text-blue-400 transition-colors flex items-center gap-3 justify-center group">
+                    <div class="p-2 bg-slate-800 rounded-full group-hover:bg-blue-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                        </svg>
+                    </div>
+                    210 220 0607
+                </a>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-sm font-medium text-slate-300">Powered by</p>
+                <a href="https://bitautomations.gr" target="_blank" class="text-lg font-bold text-white hover:text-blue-400 transition-colors">
+                    biTAutomations
+                </a>
+                <p class="text-xs mt-1 text-slate-500">Engineering & Automation Solutions</p>
+            </div>
+            
+        </div>
+    </div>
+</footer>
