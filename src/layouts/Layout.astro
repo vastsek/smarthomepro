@@ -5,13 +5,39 @@ import Footer from '../components/Footer.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description: descriptionProp } = Astro.props;
 
 // Εδώ ορίζουμε την περιγραφή που θα φαίνεται στη Google
-const description = "Ολοκληρωμένες λύσεις Smart Home KNX για αρχιτέκτονες και μηχανικούς. Μελέτη, Εγκατάσταση και Integration συστημάτων αυτοματισμού.";
-const siteUrl = "https://smarthomepro.gr"; // (Θα το αλλάξουμε όταν το ανεβάσουμε)
+// (τώρα μπορεί να διαφέρει ανά σελίδα μέσω του description prop)
+const description = descriptionProp ?? "Λύσεις Smart Home KNX στην Αθήνα και την Αττική για αρχιτέκτονες, μηχανικούς και ιδιοκτήτες κατοικιών. Μελέτη, Εγκατάσταση και Integration συστημάτων αυτοματισμού.";
+const siteUrl = "https://smarthomepro.gr";
+const ogImage = "https://smarthomepro.gr/images/og-cover.jpg"; // TODO: ανέβασε εδώ πραγματική φωτογραφία έργου (βλ. σημείωση στο Hero.astro)
+
+// JSON-LD structured data ώστε η Google να καταλαβαίνει επιχείρηση/τοποθεσία/υπηρεσία
+const localBusinessSchema = {
+	"@context": "https://schema.org",
+	"@type": "ProfessionalService",
+	"name": "SmartHomePro",
+	"description": description,
+	"url": siteUrl,
+	"telephone": "+302102200607",
+	"email": "info@smarthomepro.gr",
+	"image": ogImage,
+	"areaServed": {
+		"@type": "State",
+		"name": "Αττική"
+	},
+	"address": {
+		"@type": "PostalAddress",
+		"addressRegion": "Αττική",
+		"addressCountry": "GR"
+	},
+	"priceRange": "€€€",
+	"knowsAbout": ["KNX", "Smart Home", "Οικιακός Αυτοματισμός", "Home Automation", "GRMS"]
+};
 ---
 
 <!doctype html>
@@ -30,17 +56,20 @@ const siteUrl = "https://smarthomepro.gr"; // (Θα το αλλάξουμε ότ
         <meta property="og:url" content={siteUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200" />
+        <meta property="og:image" content={ogImage} />
 
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:url" content={siteUrl} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
-        <meta property="twitter:image" content="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200" />
+        <meta property="twitter:image" content={ogImage} />
 
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+        <!-- Structured data: βοηθάει τη Google να καταλάβει επιχείρηση/τοποθεσία/υπηρεσίες -->
+        <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
 	</head>
 	<body class="font-['Inter'] antialiased bg-white text-slate-800">
         <Header />
