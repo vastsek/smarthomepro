@@ -1,23 +1,29 @@
 ---
 // Αρχείο: src/components/Projects.astro
+import { projects } from '../data/projects';
+
+const featuredSlugs = ['monokatoikia-filothei', 'grafeia-ag-dimitrios', 'cctv-sepolia'];
+const featured = featuredSlugs
+	.map((slug) => projects.find((p) => p.slug === slug))
+	.filter((p): p is NonNullable<typeof p> => Boolean(p));
 ---
 
 <section id="projects" class="py-24 bg-slate-50">
     <div class="container mx-auto px-6">
-        
+
         <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
             <div class="max-w-2xl">
                 <span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Case Studies</span>
                 <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mt-2">
-                    Τομείς Εφαρμογής
+                    Τα Έργα Μας
                 </h2>
                 <p class="text-slate-600 text-lg mt-6">
-                    Εξειδικευμένες λύσεις KNX για κάθε τύπο κτιρίου. Από ιδιωτικές κατοικίες μέχρι ξενοδοχειακές μονάδες.
+                    Πραγματικές εγκαταστάσεις KNX και ασθενών συστημάτων, από κατοικίες μέχρι επαγγελματικούς χώρους.
                 </p>
             </div>
-            
-            <a href="#contact" class="hidden md:flex items-center gap-2 text-slate-900 font-semibold hover:text-blue-600 transition-colors">
-                Ζητήστε προσφορά
+
+            <a href="/projects/" class="hidden md:flex items-center gap-2 text-slate-900 font-semibold hover:text-blue-600 transition-colors">
+                Δείτε όλα τα έργα
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
                 </svg>
@@ -25,67 +31,36 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
-                    <img 
-                        src="https://images.unsplash.com/photo-1613545325278-f24b0cae1224?q=80&w=1000&auto=format&fit=crop" 
-                        alt="Smart Home Residence" 
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
-                </div>
-                <div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-2">
-                    <span>Οικιακός Αυτοματισμός</span>
-                    <span>•</span>
-                    <span>KNX</span>
-                </div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Πολυτελείς Κατοικίες</h3>
-                <p class="text-slate-500">
-                    Ολοκληρωμένος έλεγχος φωτισμού, σκίασης και θέρμανσης. Σενάρια "Καλημέρα" και "Αποχώρησης" για μέγιστη άνεση και ασφάλεια.
-                </p>
-            </div>
+            {featured.map((project) => (
+                <a href="/projects/" class="group block">
+                    <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+                        <img
+                            src={project.image}
+                            alt={project.title}
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-2">
+                        <span>{project.category}</span>
+                        <span>•</span>
+                        <span>{project.tags.join(' · ')}</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">{project.title}</h3>
+                    <p class="text-slate-500">
+                        {project.description}
+                    </p>
+                </a>
+            ))}
+        </div>
 
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
-                    <img 
-                        src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1000&auto=format&fit=crop" 
-                        alt="Hotel Automation" 
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
-                </div>
-                <div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-2">
-                    <span>Ξενοδοχεία</span>
-                    <span>•</span>
-                    <span>GRMS</span>
-                </div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Ξενοδοχειακές Μονάδες</h3>
-                <p class="text-slate-500">
-                    Συστήματα διαχείρισης δωματίων (GRMS). Ανίχνευση παρουσίας πελάτη για εξοικονόμηση ενέργειας και Welcome scenes κατά την άφιξη.
-                </p>
-            </div>
-
-            <div class="group cursor-pointer">
-                <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
-                    <img 
-                        src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000&auto=format&fit=crop" 
-                        alt="Apartment Renovation" 
-                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
-                </div>
-                <div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-2">
-                    <span>Ανακαίνιση</span>
-                    <span>•</span>
-                    <span>Retrofit</span>
-                </div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">Σύγχρονα Διαμερίσματα</h3>
-                <p class="text-slate-500">
-                    Αναβάθμιση συμβατικών διαμερισμάτων σε Smart Homes. Έλεγχος μέσω κινητού και φωνητικές εντολές, με minimal αισθητική.
-                </p>
-            </div>
-
+        <div class="mt-12 text-center md:hidden">
+            <a href="/projects/" class="inline-flex items-center gap-2 text-slate-900 font-semibold hover:text-blue-600 transition-colors">
+                Δείτε όλα τα έργα
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                </svg>
+            </a>
         </div>
     </div>
 </section>
