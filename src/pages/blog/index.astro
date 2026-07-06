@@ -2,48 +2,71 @@
 // Αρχείο: src/pages/blog/index.astro
 import Layout from '../../layouts/Layout.astro';
 
-// Κάθε νέο άρθρο προστίθεται εδώ ως ένα ακόμα αντικείμενο στη λίστα.
-const articles = [
+const posts = [
 	{
 		slug: 'prasino-spiti-knx',
 		title: 'Πώς το KNX κάνει το σπίτι σου πιο "πράσινο"',
-		description: 'Πώς ο αυτοματισμός KNX μειώνει την ενεργειακή κατανάλωση και πώς ενσωματώνεται με ηλιακά και αντλίες θερμότητας.',
+		excerpt: 'Πώς ο αυτοματισμός KNX μειώνει την ενεργειακή κατανάλωση μέσω έξυπνου ελέγχου θέρμανσης, φωτισμού και σκίασης, και πώς ενσωματώνεται με ηλιακά και αντλίες θερμότητας.',
 		date: '2026-07-06',
+		category: 'Ενέργεια & Βιωσιμότητα',
 	},
 	{
 		slug: 'kostos-exypnou-spitiou-knx',
-		title: 'Πόσο κοστίζει το έξυπνο σπίτι KNX;',
-		description: 'Αναλύουμε τους παράγοντες που καθορίζουν το κόστος μιας εγκατάστασης KNX και δίνουμε ενδεικτικά εύρη τιμών.',
+		title: 'Πόσο κοστίζει ένα έξυπνο σπίτι με KNX;',
+		excerpt: 'Αναλυτικός οδηγός κόστους για συστήματα οικιακού αυτοματισμού KNX: τι επηρεάζει την τιμή, ενδεικτικά εύρη κόστους ανά μέγεθος κατοικίας και πώς να ζητήσετε σωστή προσφορά.',
 		date: '2026-07-05',
+		category: 'Κόστος & Σχεδιασμός',
 	},
 ];
+
+const formatDate = (iso: string) =>
+	new Date(iso).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <Layout
-	title="Blog | SmartHomePro - Άρθρα για Έξυπνο Σπίτι KNX"
-	description="Χρήσιμα άρθρα και οδηγοί για το έξυπνο σπίτι, την τεχνολογία KNX και τον οικιακό αυτοματισμό στην Αθήνα και την Αττική."
+	title="Blog | SmartHomePro - Άρθρα για Smart Home & KNX"
+	description="Χρήσιμα άρθρα για οικιακό αυτοματισμό, KNX, GRMS και έξυπνες λύσεις κτιρίων από την ομάδα της SmartHomePro."
 >
-	<main class="pt-32 pb-24 bg-white min-h-screen">
-		<div class="container mx-auto px-6 max-w-4xl">
-			<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mb-4">Άρθρα &amp; Οδηγοί</h1>
-			<p class="text-lg text-slate-600 mb-16 max-w-2xl">
-				Πρακτικές πληροφορίες για το έξυπνο σπίτι KNX — κόστος, τεχνολογία και επιλογές, γραμμένες
-				από την ομάδα της SmartHomePro.
-			</p>
+	<main class="pt-40 pb-24">
+		<div class="container mx-auto px-6">
 
-			<div class="grid gap-8">
-				{articles.map((article) => (
-					<a
-						href={`/blog/${article.slug}/`}
-						class="block p-8 border border-slate-100 rounded-xl hover:border-blue-200 hover:shadow-lg transition-all group"
-					>
-						<h2 class="text-2xl font-bold text-slate-900 mb-2 group-hover:text-blue-600 transition-colors">
-							{article.title}
-						</h2>
-						<p class="text-slate-600">{article.description}</p>
+			<div class="max-w-2xl mb-16">
+				<span class="text-blue-600 font-bold tracking-wider uppercase text-sm">Blog</span>
+				<h1 class="text-4xl md:text-5xl font-bold text-slate-900 mt-2">
+					Άρθρα & Οδηγοί
+				</h1>
+				<p class="text-slate-600 text-lg mt-6">
+					Πρακτικές γνώσεις για smart home, KNX και οικιακό αυτοματισμό — από την εμπειρία μας σε πραγματικά έργα.
+				</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				{posts.map((post) => (
+					<a href={`/blog/${post.slug}/`} class="group block">
+						<div class="p-8 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl hover:shadow-slate-900/5 transition-all h-full flex flex-col">
+							<div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-4">
+								<span>{post.category}</span>
+							</div>
+							<h2 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+								{post.title}
+							</h2>
+							<p class="text-slate-500 mb-6 flex-1">
+								{post.excerpt}
+							</p>
+							<div class="flex items-center justify-between text-sm text-slate-400">
+								<time datetime={post.date}>{formatDate(post.date)}</time>
+								<span class="flex items-center gap-2 text-slate-900 font-semibold group-hover:text-blue-600 transition-colors">
+									Διαβάστε
+									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+									</svg>
+								</span>
+							</div>
+						</div>
 					</a>
 				))}
 			</div>
+
 		</div>
 	</main>
 </Layout>
