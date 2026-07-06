@@ -1,22 +1,20 @@
 ---
 // Αρχείο: src/components/Hero.astro
 //
-// TODO (ΣΗΜΑΝΤΙΚΟ): Η παρακάτω φωτογραφία είναι στοκ από Unsplash.
-// Αντικατέστησέ την με πραγματική φωτογραφία από ολοκληρωμένο έργο σου:
-// 1. Ανέβασε το αρχείο στο public/images/ (π.χ. public/images/hero-project.jpg)
-// 2. Άλλαξε το src παρακάτω σε "/images/hero-project.jpg"
-// 3. Χρησιμοποίησε την ΙΔΙΑ φωτογραφία (ή μια εξίσου εντυπωσιακή) ως ogImage
-//    στο src/layouts/Layout.astro, ώστε το social preview να δείχνει δικό σου έργο.
+// Hero: πραγματική φωτογραφία από το έργο στη Γλυφάδα (εξωτερική πισίνα με
+// RGB υποβρύχιο φωτισμό). Αν θέλεις να το αλλάξεις, αντικατέστησε το
+// public/images/hero-pool.jpg (ή δείξε σε άλλο αρχείο) και ενημέρωσε
+// αντίστοιχα το ogImage στο src/layouts/Layout.astro για το social preview.
 ---
 
 <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img 
-            src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2000&auto=format&fit=crop" 
-            alt="Smart Home Interior" 
+        <img
+            src="/images/hero-pool.jpg"
+            alt="Έξυπνη κατοικία με αυτοματισμό KNX και φωτισμό πισίνας στη Γλυφάδα"
             class="w-full h-full object-cover"
         />
-        <div class="absolute inset-0 bg-slate-900/50"></div>
+        <div class="absolute inset-0 bg-slate-900/60"></div>
     </div>
 
     <div class="relative z-10 container mx-auto px-6 text-center text-white">

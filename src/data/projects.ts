@@ -7,6 +7,10 @@
 export interface GalleryImage {
 	src: string;
 	caption: string;
+	// Παρακάμπτει το imageFit του έργου για τη συγκεκριμένη εικόνα.
+	// Χρήσιμο όταν σε ένα gallery συνυπάρχουν φωτογραφίες (cover) με
+	// screenshots του app (contain).
+	fit?: 'cover' | 'contain';
 }
 
 export interface Project {
@@ -45,17 +49,23 @@ export const projects: Project[] = [
 		title: 'Κατοικία στη Γλυφάδα',
 		location: 'Γλυφάδα',
 		category: 'Οικιακός Αυτοματισμός',
-		tags: ['KNX', 'ComfortClick'],
-		description: 'Αυτοματισμός φωτισμού, κήπου, πάρκινγκ, ρολών και θέρμανσης μέσω ComfortClick, με ενιαίο έλεγχο για όλο το ακίνητο.',
-		longDescription: 'Πλήρης αυτοματισμός κατοικίας με πλατφόρμα ComfortClick. Ο ιδιοκτήτης ελέγχει ξεχωριστά τον φωτισμό εισόδου, κήπου και πισίνας, το πάρκινγκ, τα ρολά ανά δωμάτιο και τη θέρμανση ανά όροφο, μέσα από ένα ενιαίο, εύχρηστο interface.',
-		imageFit: 'contain',
+		tags: ['KNX', 'ABB', 'ComfortClick'],
+		description: 'Ολοκληρωμένος αυτοματισμός σύγχρονης κατοικίας: φωτισμός, μηχανοκίνητες κουρτίνες, ρολά, πισίνα και θέρμανση, με κομψά KNX keypads και ενιαίο έλεγχο μέσω ComfortClick.',
+		longDescription: 'Πλήρης αυτοματισμός σύγχρονης μονοκατοικίας με σύστημα KNX και οπτικοποίηση μέσω ComfortClick. Η εγκατάσταση συνδυάζει κομψά keypads της ABB, εναρμονισμένα με τα υλικά του χώρου, με αρχιτεκτονικό κρυφό φωτισμό LED, μηχανοκίνητες κουρτίνες, σενάρια φωτισμού, θέρμανση Daikin ανά όροφο και έλεγχο της εξωτερικής πισίνας με RGB υποβρύχιο φωτισμό. Ενσωματώθηκε επίσης σύστημα ασφαλείας και θυροτηλεόρασης Paradox, όλα προσβάσιμα από ένα ενιαίο interface.',
+		imageFit: 'cover',
 		gallery: [
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo1.jpg', caption: 'Φωτισμός σπιτιού ανά χώρο (είσοδος, σκάλες, σαλόνι, υπόγειο)' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo2.jpg', caption: 'Φωτισμός εισόδου με ξεχωριστό έλεγχο ασφαλείας' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo3.jpg', caption: 'Φωτισμός κήπου και πισίνας' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo4.jpg', caption: 'Φωτισμός και έλεγχος πάρκινγκ' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo5.jpg', caption: 'Έλεγχος ρολών ανά δωμάτιο' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo6.jpg', caption: 'Θερμοστάτης ορόφου (HVAC)' },
+			{ src: '/images/projects/glyfada/pool-night.jpg', caption: 'Εξωτερική πισίνα με RGB υποβρύχιο φωτισμό, ενταγμένη στον αυτοματισμό του σπιτιού' },
+			{ src: '/images/projects/glyfada/bedroom-headboard.jpg', caption: 'Κρεβατοκάμαρα: κρυφός φωτισμός κεφαλαριού και διακριτικά κρεμαστά φωτιστικά' },
+			{ src: '/images/projects/glyfada/entrance-night.jpg', caption: 'Είσοδος με αρχιτεκτονικό κρυφό LED και ενσωματωμένη κάμερα ασφαλείας' },
+			{ src: '/images/projects/glyfada/bedroom-curtains.jpg', caption: 'Μηχανοκίνητες κουρτίνες (διπλό στρώμα) και σενάριο φωτισμού βραδιού' },
+			{ src: '/images/projects/glyfada/kids-room.jpg', caption: 'Παιδικό δωμάτιο με κρυφό φωτισμό LED σε ραφιέρα και γραφείο' },
+			{ src: '/images/projects/glyfada/keypad-detail.jpg', caption: 'Κομψό KNX keypad της ABB, εναρμονισμένο με τα υλικά του χώρου' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo1.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός σπιτιού ανά χώρο (είσοδος, σκάλες, σαλόνι, υπόγειο)', fit: 'contain' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo2.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός εισόδου με ξεχωριστό έλεγχο ασφαλείας', fit: 'contain' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo3.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός κήπου και πισίνας', fit: 'contain' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo4.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός και έλεγχος πάρκινγκ', fit: 'contain' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo5.jpg', caption: 'Οπτικοποίηση ComfortClick: έλεγχος ρολών ανά δωμάτιο', fit: 'contain' },
+			{ src: '/images/projects/glyfada/mobile-app-cc-photo6.jpg', caption: 'Οπτικοποίηση ComfortClick: θερμοστάτης ορόφου (HVAC)', fit: 'contain' },
 		],
 	},
 	{
