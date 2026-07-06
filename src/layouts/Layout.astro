@@ -70,6 +70,29 @@ const localBusinessSchema = {
 
         <!-- Structured data: βοηθάει τη Google να καταλάβει επιχείρηση/τοποθεσία/υπηρεσίες -->
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+
+        <style is:global>
+            /* --- Καλλιτεχνικό σύστημα backgrounds ---
+               Reusable treatments ώστε τα sections να έχουν συνεπή ρυθμό, βάθος και υφή. */
+
+            /* Ανοιχτό section με διακριτικό dot-grid (engineering/blueprint αίσθηση).
+               Το πρώτο layer είναι απαλό λευκό fade στην κορυφή, ώστε το section να
+               «αναδύεται» μαλακά από το λευκό section που προηγείται (soft transition). */
+            .bg-dotted {
+                background-color: #f8fafc; /* slate-50 */
+                background-image:
+                    linear-gradient(to bottom, #ffffff, rgb(255 255 255 / 0) 160px),
+                    radial-gradient(rgb(15 23 42 / 0.05) 1px, transparent 1px);
+                background-size: 100% 100%, 22px 22px;
+                background-repeat: no-repeat, repeat;
+            }
+
+            /* Σκούρο navy section με απαλό μπλε glow στην κορυφή (βάθος αντί για flat) */
+            .bg-dark-glow {
+                background-color: #0f172a; /* slate-900 */
+                background-image: radial-gradient(55% 45% at 50% 0%, rgb(37 99 235 / 0.18), transparent 70%);
+            }
+        </style>
 	</head>
 	<body class="font-['Inter'] antialiased bg-white text-slate-800">
         <Header />
