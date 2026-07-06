@@ -24,11 +24,11 @@ import { projects } from '../../data/projects';
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{projects.map((project) => (
 					<div class="group">
-						<div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-6">
+						<div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-6", project.imageFit === 'contain' ? 'bg-slate-900' : '']}>
 							<img
 								src={project.image}
 								alt={project.title}
-								class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+								class:list={["w-full h-full transition-transform duration-700 group-hover:scale-110", project.imageFit === 'contain' ? 'object-contain p-6' : 'object-cover']}
 							/>
 							<div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
 						</div>

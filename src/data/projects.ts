@@ -1,9 +1,9 @@
 // Αρχείο: src/data/projects.ts
 //
-// TODO (ΣΗΜΑΝΤΙΚΟ): Οι εικόνες παρακάτω είναι προσωρινές (stock από Unsplash),
-// μέχρι να ανέβουν πραγματικές φωτογραφίες από κάθε έργο.
-// Αντικατέστησε το `image` με το path της πραγματικής φωτογραφίας
-// (π.χ. "/images/projects/filothei.jpg") μόλις είναι διαθέσιμη.
+// Οι εικόνες των 3 KNX έργων (Φιλοθέη, Γλυφάδα, Άγ. Δημήτριος) είναι screenshots
+// του mobile app ελέγχου — δεν υπάρχουν ακόμα πραγματικές φωτογραφίες του χώρου.
+// Αντικατέστησε το `image` με φωτογραφία χώρου (και βάλε imageFit: 'cover')
+// μόλις γίνει διαθέσιμη.
 
 export interface Project {
 	slug: string;
@@ -13,6 +13,7 @@ export interface Project {
 	tags: string[];
 	description: string;
 	image: string;
+	imageFit?: 'cover' | 'contain';
 }
 
 export const projects: Project[] = [
@@ -23,7 +24,8 @@ export const projects: Project[] = [
 		category: 'Οικιακός Αυτοματισμός',
 		tags: ['KNX', 'Home Assistant'],
 		description: 'Πλήρης αυτοματισμός μονοκατοικίας με έλεγχο μέσω mobile app: γκαραζόπορτα, πισίνα, υπνοδωμάτια και ενδοδαπέδια θέρμανση, όλα από ένα σημείο.',
-		image: 'https://images.unsplash.com/photo-1613545325278-f24b0cae1224?q=80&w=1200&auto=format&fit=crop',
+		image: '/images/projects/filothei-app.jpg',
+		imageFit: 'contain',
 	},
 	{
 		slug: 'katoikia-glyfada',
@@ -32,7 +34,8 @@ export const projects: Project[] = [
 		category: 'Οικιακός Αυτοματισμός',
 		tags: ['KNX', 'ComfortClick'],
 		description: 'Αυτοματισμός φωτισμού, κήπου, πάρκινγκ, ρολών και θέρμανσης μέσω ComfortClick, με ενιαίο έλεγχο για όλο το ακίνητο.',
-		image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=1200&auto=format&fit=crop',
+		image: '/images/projects/glyfada-app.jpg',
+		imageFit: 'contain',
 	},
 	{
 		slug: 'grafeia-ag-dimitrios',
@@ -41,7 +44,8 @@ export const projects: Project[] = [
 		category: 'Επαγγελματικός Χώρος',
 		tags: ['KNX', 'ABB'],
 		description: 'Έλεγχος φωτισμού γραφείων, εξωτερικών χώρων και κήπου μέσω mobile app, προσαρμοσμένος στις ανάγκες καθημερινής λειτουργίας ενός επαγγελματικού χώρου.',
-		image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&auto=format&fit=crop',
+		image: '/images/projects/ag-dimitrios-app.png',
+		imageFit: 'contain',
 	},
 	{
 		slug: 'domimeni-kalodiosi-vyronas',
@@ -50,7 +54,8 @@ export const projects: Project[] = [
 		category: 'Δίκτυα & Υποδομή',
 		tags: ['Δομημένη Καλωδίωση', 'Rack'],
 		description: 'Τερματισμός γραμμών δομημένης καλωδίωσης και εγκατάσταση καμπίνας rack με πλήρη δικτυακό εξοπλισμό σε τεχνικό γραφείο.',
-		image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop',
+		image: '/images/projects/vyronas-rack.jpg',
+		imageFit: 'cover',
 	},
 	{
 		slug: 'cctv-sepolia',
@@ -59,6 +64,7 @@ export const projects: Project[] = [
 		category: 'Ασφάλεια & Παρακολούθηση',
 		tags: ['CCTV'],
 		description: 'Εγκατάσταση κλειστού κυκλώματος παρακολούθησης σε πολλαπλά σημεία αλυσίδας καταστημάτων, με κεντρική διαχείριση και απομακρυσμένη πρόσβαση.',
-		image: 'https://images.unsplash.com/photo-1557597774-9d273605dfa9?q=80&w=1200&auto=format&fit=crop',
+		image: '/images/projects/sepolia-cctv.jpg',
+		imageFit: 'cover',
 	},
 ];
