@@ -1,0 +1,87 @@
+---
+// Αρχείο: src/pages/projects/[slug].astro
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+
+export function getStaticPaths() {
+	return projects.map((project) => ({
+		params: { slug: project.slug },
+		props: { project },
+	}));
+}
+
+const { project } = Astro.props;
+const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+---
+
+<Layout
+	title={`${project.title} | Έργα SmartHomePro`}
+	description={project.description}
+>
+	<main class="pt-40 pb-24">
+		<div class="container mx-auto px-6 max-w-5xl">
+
+			<a href="/projects/" class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-600 transition-colors mb-6">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+				</svg>
+				Πίσω σε όλα τα έργα
+			</a>
+
+			<div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-3">
+				<span>{project.category}</span>
+				<span>•</span>
+				<span>{project.tags.join(' · ')}</span>
+			</div>
+			<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-3">{project.title}</h1>
+			<p class="text-slate-400 mb-8">{project.location}</p>
+
+			<p class="text-slate-700 text-lg leading-relaxed max-w-3xl mb-12">
+				{project.longDescription}
+			</p>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+				{project.gallery.map((img) => (
+					<figure class:list={["rounded-xl overflow-hidden", project.imageFit === 'contain' ? 'bg-slate-900' : '']}>
+						<div class:list={["aspect-[4/3]", project.imageFit === 'contain' ? 'flex items-center justify-center' : '']}>
+							<img
+								src={img.src}
+								alt={img.caption}
+								class:list={["w-full h-full", project.imageFit === 'contain' ? 'object-contain p-6' : 'object-cover']}
+							/>
+						</div>
+						<figcaption class="text-sm text-slate-500 mt-3">{img.caption}</figcaption>
+					</figure>
+				))}
+			</div>
+
+			<div class="p-8 bg-slate-900 rounded-xl text-center mb-16">
+				<h3 class="text-2xl font-bold text-white mb-4">Θέλετε ένα αντίστοιχο έργο για τον δικό σας χώρο;</h3>
+				<a href="/#contact" class="inline-block px-8 py-4 bg-blue-600 text-white text-base font-medium rounded hover:bg-blue-500 transition-colors shadow-lg">
+					Ζητήστε Μελέτη
+				</a>
+			</div>
+
+			{otherProjects.length > 0 && (
+				<div>
+					<h3 class="text-xl font-bold text-slate-900 mb-6">Άλλα έργα</h3>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						{otherProjects.map((p) => (
+							<a href={`/projects/${p.slug}/`} class="group block">
+								<div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-4", p.imageFit === 'contain' ? 'bg-slate-900' : '']}>
+									<img
+										src={p.gallery[0].src}
+										alt={p.title}
+										class:list={["w-full h-full transition-transform duration-700 group-hover:scale-110", p.imageFit === 'contain' ? 'object-contain p-4' : 'object-cover']}
+									/>
+								</div>
+								<h4 class="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">{p.title}</h4>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+		</div>
+	</main>
+</Layout>

@@ -32,10 +32,10 @@ const featured = featuredSlugs
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featured.map((project) => (
-                <a href="/projects/" class="group block">
+                <a href={`/projects/${project.slug}/`} class="group block">
                     <div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-6", project.imageFit === 'contain' ? 'bg-slate-900' : '']}>
                         <img
-                            src={project.image}
+                            src={project.gallery[0].src}
                             alt={project.title}
                             class:list={["w-full h-full transition-transform duration-700 group-hover:scale-110", project.imageFit === 'contain' ? 'object-contain p-6' : 'object-cover']}
                         />
