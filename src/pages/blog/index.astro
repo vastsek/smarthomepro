@@ -44,10 +44,10 @@ const formatDate = (iso: string) =>
 				{posts.map((post) => (
 					<a href={`/blog/${post.slug}/`} class="group block">
 						<div class="p-8 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl hover:shadow-slate-900/5 transition-all h-full flex flex-col">
-							<div class="flex items-center gap-3 text-sm text-blue-600 font-medium mb-4">
+							<div class="flex items-center gap-3 text-sm text-teal-600 font-medium mb-4">
 								<span>{post.category}</span>
 							</div>
-							<h2 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
+							<h2 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-teal-600 transition-colors">
 								{post.title}
 							</h2>
 							<p class="text-slate-500 mb-6 flex-1">
@@ -55,7 +55,7 @@ const formatDate = (iso: string) =>
 							</p>
 							<div class="flex items-center justify-between text-sm text-slate-400">
 								<time datetime={post.date}>{formatDate(post.date)}</time>
-								<span class="flex items-center gap-2 text-slate-900 font-semibold group-hover:text-blue-600 transition-colors">
+								<span class="flex items-center gap-2 text-slate-900 font-semibold group-hover:text-teal-600 transition-colors">
 									Διαβάστε
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
 										<path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />

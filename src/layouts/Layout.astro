@@ -87,22 +87,23 @@ const localBusinessSchema = {
                 background-repeat: no-repeat, repeat;
             }
 
-            /* Σκούρο navy section με απαλό μπλε glow στην κορυφή (βάθος αντί για flat) */
+            /* Σκούρο navy section με απαλό emerald→teal glow στην κορυφή (βάθος αντί για flat,
+               απηχεί το gradient του logo) */
             .bg-dark-glow {
                 background-color: #0f172a; /* slate-900 */
-                background-image: radial-gradient(55% 45% at 50% 0%, rgb(37 99 235 / 0.18), transparent 70%);
+                background-image: radial-gradient(55% 45% at 50% 0%, rgb(16 185 129 / 0.18), transparent 70%);
             }
 
-            /* Section eyebrow: κομψό μπλε pill badge με κουκκίδα (accent χρώμα).
-               Αντικαθιστά τα απλά μπλε uppercase labels για πιο «designed» αίσθηση. */
+            /* Section eyebrow: κομψό teal pill badge με κουκκίδα (accent χρώμα).
+               Αντικαθιστά τα απλά uppercase labels για πιο «designed» αίσθηση. */
             .eyebrow {
                 display: inline-flex;
                 align-items: center;
                 gap: 0.5rem;
                 padding: 0.35rem 0.85rem;
                 border-radius: 9999px;
-                background-color: rgb(37 99 235 / 0.1); /* blue-600/10 */
-                color: #1d4ed8; /* blue-700 */
+                background-color: rgb(13 148 136 / 0.1); /* teal-600/10 */
+                color: #0f766e; /* teal-700 */
                 font-size: 0.75rem;
                 font-weight: 700;
                 letter-spacing: 0.08em;
