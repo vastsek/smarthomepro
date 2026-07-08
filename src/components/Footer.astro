@@ -18,13 +18,15 @@ const year = new Date().getFullYear();
                     
                     <div class="w-px h-10 bg-slate-700"></div>
 
-                    <img 
-                        src="/images/knx_partner.png" 
-                        alt="KNX Partner" 
-                        class="h-8 md:h-10 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity brightness-0 invert" 
-                    />
+                    <div class="bg-white rounded-lg px-3 py-2 flex items-center">
+                        <img
+                            src="/images/knx_partner.png"
+                            alt="KNX"
+                            class="h-6 md:h-7 w-auto object-contain"
+                        />
+                    </div>
                 </div>
-                
+
                 <p class="text-sm">
                     &copy; {year} SmartHomePro. All rights reserved.
                 </p>
@@ -49,7 +51,11 @@ const year = new Date().getFullYear();
                 </a>
                 <p class="text-xs mt-1 text-slate-500">Engineering & Automation Solutions</p>
             </div>
-            
+
         </div>
+
+        <p class="mt-10 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+            KNX and ETS are registered trademarks of KNX Association cvba Belgium and are used with kind permission.
+        </p>
     </div>
 </footer>
