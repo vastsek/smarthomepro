@@ -6,17 +6,40 @@ import Footer from '../components/Footer.astro';
 interface Props {
 	title: string;
 	description?: string;
+	// Πέρασε publishDate (ISO) σε άρθρα blog → παράγεται αυτόματα BlogPosting schema.
+	publishDate?: string;
 }
 
-const { title, description: descriptionProp } = Astro.props;
+const { title, description: descriptionProp, publishDate } = Astro.props;
 
 // Εδώ ορίζουμε την περιγραφή που θα φαίνεται στη Google
 // (τώρα μπορεί να διαφέρει ανά σελίδα μέσω του description prop)
 const description = descriptionProp ?? "Λύσεις Smart Home KNX στην Αθήνα και την Αττική για αρχιτέκτονες, μηχανικούς και ιδιοκτήτες κατοικιών. Μελέτη, Εγκατάσταση και Integration συστημάτων αυτοματισμού.";
 const siteUrl = "https://smarthomepro.gr";
+const pageUrl = new URL(Astro.url.pathname, siteUrl).href;
+const isArticle = Boolean(publishDate);
 const ogImage = "https://smarthomepro.gr/images/og-cover.jpg"; // TODO: ανέβασε εδώ πραγματική φωτογραφία έργου (βλ. σημείωση στο Hero.astro)
 
 // JSON-LD structured data ώστε η Google να καταλαβαίνει επιχείρηση/τοποθεσία/υπηρεσία
+// BlogPosting schema — παράγεται μόνο σε άρθρα (όταν δοθεί publishDate).
+const blogPostingSchema = isArticle ? {
+	"@context": "https://schema.org",
+	"@type": "BlogPosting",
+	"headline": title,
+	"description": description,
+	"image": ogImage,
+	"datePublished": publishDate,
+	"dateModified": publishDate,
+	"inLanguage": "el",
+	"author": { "@type": "Organization", "name": "SmartHomePro", "url": siteUrl },
+	"publisher": {
+		"@type": "Organization",
+		"name": "SmartHomePro",
+		"logo": { "@type": "ImageObject", "url": siteUrl + "/images/SmartHomePro_Hor_B.png" }
+	},
+	"mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+} : null;
+
 const localBusinessSchema = {
 	"@context": "https://schema.org",
 	"@type": "ProfessionalService",
@@ -51,15 +74,16 @@ const localBusinessSchema = {
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="robots" content="index, follow" />
+        <link rel="canonical" href={pageUrl} />
 
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={siteUrl} />
+        <meta property="og:type" content={isArticle ? "article" : "website"} />
+        <meta property="og:url" content={pageUrl} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={ogImage} />
 
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content={siteUrl} />
+        <meta property="twitter:url" content={pageUrl} />
         <meta property="twitter:title" content={title} />
         <meta property="twitter:description" content={description} />
         <meta property="twitter:image" content={ogImage} />
@@ -70,6 +94,9 @@ const localBusinessSchema = {
 
         <!-- Structured data: βοηθάει τη Google να καταλάβει επιχείρηση/τοποθεσία/υπηρεσίες -->
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+        {blogPostingSchema && (
+            <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+        )}
 
         <style is:global>
             /* --- Καλλιτεχνικό σύστημα backgrounds ---

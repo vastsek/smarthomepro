@@ -9,7 +9,7 @@ const publishDate = '2026-07-06';
 const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description} publishDate={publishDate}>
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">
 
