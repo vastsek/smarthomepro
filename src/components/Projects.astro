@@ -1,8 +1,9 @@
 ---
 // Αρχείο: src/components/Projects.astro
 import { projects } from '../data/projects';
+import ProjectPlaceholder from './ProjectPlaceholder.astro';
 
-const featuredSlugs = ['katoikia-glyfada', 'monokatoikia-filothei', 'grafeia-ag-dimitrios', 'cctv-sepolia'];
+const featuredSlugs = ['ypersyghroni-katoikia-600', 'katoikia-glyfada', 'grafeia-ag-dimitrios', 'cctv-sepolia'];
 const featured = featuredSlugs
 	.map((slug) => projects.find((p) => p.slug === slug))
 	.filter((p): p is NonNullable<typeof p> => Boolean(p));
@@ -33,16 +34,22 @@ const featured = featuredSlugs
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {featured.map((project) => (
                 <a href={`/projects/${project.slug}/`} class="group block">
-                    <div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-6", project.imageFit === 'contain' ? 'flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black' : '']}>
-                        {project.imageFit === 'contain' && (
-                            <div class="absolute w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
+                    <div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-6", project.gallery.length > 0 && project.imageFit === 'contain' ? 'flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black' : '']}>
+                        {project.gallery.length === 0 ? (
+                            <ProjectPlaceholder />
+                        ) : (
+                            <Fragment>
+                                {project.imageFit === 'contain' && (
+                                    <div class="absolute w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
+                                )}
+                                <img
+                                    src={project.gallery[0].src}
+                                    alt={project.title}
+                                    class:list={["transition-transform duration-700 group-hover:scale-110", project.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
+                                />
+                                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                            </Fragment>
                         )}
-                        <img
-                            src={project.gallery[0].src}
-                            alt={project.title}
-                            class:list={["transition-transform duration-700 group-hover:scale-110", project.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
-                        />
-                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
                     </div>
                     <div class="flex items-center gap-3 text-sm text-teal-600 font-medium mb-2">
                         <span>{project.category}</span>
