@@ -18,6 +18,7 @@ const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3
 <Layout
 	title={`${project.title} | Έργα SmartHomePro`}
 	description={project.description}
+	ogImage={project.gallery[0]?.src}
 >
 	<main class="pt-40 pb-24">
 		<div class="container mx-auto px-6 max-w-5xl">
