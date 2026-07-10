@@ -1,5 +1,8 @@
 ---
 // Αρχείο: src/components/Footer.astro
+import { Image } from 'astro:assets';
+import knxPartner from '../assets/images/knx-partner.jpg';
+
 const year = new Date().getFullYear();
 ---
 
@@ -10,18 +13,23 @@ const year = new Date().getFullYear();
             <div class="text-center md:text-left flex flex-col items-center md:items-start">
                 
                 <div class="flex items-center gap-6 mb-6">
-                    <img 
-                        src="/images/SmartHomePro_Hor_W.png" 
-                        alt="SmartHomePro" 
-                        class="h-12 md:h-16 w-auto object-contain" 
+                    <img
+                        src="/images/SmartHomePro_Hor_W.png"
+                        alt="SmartHomePro"
+                        width="1350"
+                        height="683"
+                        loading="lazy"
+                        class="h-12 md:h-16 w-auto object-contain"
                     />
                     
                     <div class="w-px h-10 bg-slate-700"></div>
 
                     <div class="bg-white rounded-lg px-3 py-2 flex items-center">
-                        <img
-                            src="/images/knx-partner.jpg"
+                        <Image
+                            src={knxPartner}
                             alt="Πιστοποιημένος KNX Partner"
+                            height={80}
+                            loading="lazy"
                             class="h-8 md:h-10 w-auto object-contain"
                         />
                     </div>

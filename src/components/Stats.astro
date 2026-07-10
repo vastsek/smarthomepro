@@ -1,6 +1,9 @@
 ---
 // Αρχείο: src/components/Stats.astro
 // Μπάντα social proof με πραγματικά/επαληθεύσιμα στοιχεία (χωρίς επινοημένους αριθμούς έργων).
+import { Image } from 'astro:assets';
+import knxPartner from '../assets/images/knx-partner.jpg';
+
 const stats = [
     { value: '2006', label: 'Πιστοποιημένος KNX Partner' },
     { value: '20+', label: 'Χρόνια εμπειρίας' },
@@ -15,9 +18,11 @@ const stats = [
     <div class="container mx-auto px-6 relative">
         <div class="flex justify-center mb-12">
             <div class="inline-flex items-center bg-white rounded-xl px-7 py-4 shadow-lg shadow-teal-900/20">
-                <img
-                    src="/images/knx-partner.jpg"
+                <Image
+                    src={knxPartner}
                     alt="Πιστοποιημένος KNX Partner"
+                    height={96}
+                    loading="lazy"
                     class="h-12 w-auto object-contain"
                 />
             </div>

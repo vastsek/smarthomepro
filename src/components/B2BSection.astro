@@ -1,10 +1,16 @@
 ---
 // Αρχείο: src/components/B2BSection.astro
+import { Image } from 'astro:assets';
+import knxTouchPanel from '../assets/images/showcase/knx-touch-panel.jpg';
+import knxModules from '../assets/images/showcase/knx-modules.jpg';
+import automationPanel from '../assets/images/showcase/automation-panel.jpg';
+import ledStaircase from '../assets/images/showcase/led-staircase.jpg';
+
 const behindTheScenes = [
-    { src: '/images/showcase/knx-touch-panel.jpg', caption: 'Κεντρικός έλεγχος σεναρίων & κλιματισμού από ένα panel' },
-    { src: '/images/showcase/knx-modules.jpg', caption: 'Ο «εγκέφαλος» KNX: αξιόπιστα υλικά ABB' },
-    { src: '/images/showcase/automation-panel.jpg', caption: 'Οργανωμένος πίνακας αυτοματισμού, πλήρως τεκμηριωμένος' },
-    { src: '/images/showcase/led-staircase.jpg', caption: 'Αρχιτεκτονικός κρυφός φωτισμός στο αποτέλεσμα' },
+    { src: knxTouchPanel, caption: 'Κεντρικός έλεγχος σεναρίων & κλιματισμού από ένα panel' },
+    { src: knxModules, caption: 'Ο «εγκέφαλος» KNX: αξιόπιστα υλικά ABB' },
+    { src: automationPanel, caption: 'Οργανωμένος πίνακας αυτοματισμού, πλήρως τεκμηριωμένος' },
+    { src: ledStaircase, caption: 'Αρχιτεκτονικός κρυφός φωτισμός στο αποτέλεσμα' },
 ];
 ---
 
@@ -75,9 +81,11 @@ const behindTheScenes = [
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {behindTheScenes.map((item) => (
                     <figure class="group relative overflow-hidden rounded-xl aspect-[4/5] bg-slate-900">
-                        <img
+                        <Image
                             src={item.src}
                             alt={item.caption}
+                            widths={[320, 480, 640]}
+                            sizes="(min-width: 1024px) 25vw, 50vw"
                             loading="lazy"
                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />

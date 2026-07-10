@@ -1,5 +1,6 @@
 ---
 // Αρχείο: src/components/Projects.astro
+import { Image } from 'astro:assets';
 import { projects } from '../data/projects';
 import ProjectPlaceholder from './ProjectPlaceholder.astro';
 
@@ -42,9 +43,12 @@ const featured = featuredSlugs
                                 {project.imageFit === 'contain' && (
                                     <div class="absolute w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
                                 )}
-                                <img
+                                <Image
                                     src={project.gallery[0].src}
                                     alt={project.title}
+                                    widths={[320, 480, 640]}
+                                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                                    loading="lazy"
                                     class:list={["transition-transform duration-700 group-hover:scale-110", project.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
                                 />
                                 <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>

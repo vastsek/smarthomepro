@@ -1,15 +1,21 @@
 ---
 // Αρχείο: src/pages/blog/prasino-spiti-knx.astro
+import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import houseOfTheFuture from '../../assets/images/blog/house-of-the-future.jpg';
+import greenHomeSavings from '../../assets/images/blog/green-home-savings.jpg';
 
 const title = 'Πώς το KNX κάνει το σπίτι σου πιο "πράσινο"';
 const description = 'Πώς ο αυτοματισμός KNX μειώνει την ενεργειακή κατανάλωση μέσω έξυπνου ελέγχου θέρμανσης, φωτισμού και σκίασης, και πώς ενσωματώνεται με ηλιακά και αντλίες θερμότητας.';
 
 const publishDate = '2026-07-06';
 const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+// og:image: βελτιστοποιημένη εκδοχή (JPEG, max 1200px) της hero εικόνας του άρθρου.
+const ogImage = (await getImage({ src: houseOfTheFuture, width: Math.min(1200, houseOfTheFuture.width), format: 'jpeg' })).src;
 ---
 
-<Layout title={title} description={description} publishDate={publishDate} ogImage="/images/blog/house-of-the-future.jpg">
+<Layout title={title} description={description} publishDate={publishDate} ogImage={ogImage}>
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">
 
@@ -35,9 +41,12 @@ const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 
 					το ενεργειακό αποτύπωμα του σπιτιού σου, χωρίς να θυσιάσεις καθόλου την άνεση.
 				</p>
 
-				<img
-					src="/images/blog/house-of-the-future.jpg"
+				<Image
+					src={houseOfTheFuture}
 					alt="Απεικόνιση έξυπνου σπιτιού με αυτοματοποιημένα συστήματα"
+					widths={[480, 768, 1024]}
+					sizes="(min-width: 768px) 768px, 100vw"
+					loading="lazy"
 					class="w-full rounded-xl"
 				/>
 
@@ -106,9 +115,12 @@ const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 
 						ελέγχονται και να παρακολουθούνται μέσα από το ίδιο σύστημα, ώστε να συνεργάζονται έξυπνα
 						αντί να λειτουργούν ανεξάρτητα το ένα από το άλλο.
 					</p>
-					<img
-						src="/images/blog/green-home-savings.jpg"
+					<Image
+						src={greenHomeSavings}
 						alt="Ενσωμάτωση ηλιακών, αντλίας θερμότητας και boiler σε σύστημα KNX"
+						widths={[480, 768, 1024]}
+						sizes="(min-width: 768px) 768px, 100vw"
+						loading="lazy"
 						class="w-full rounded-xl mt-6"
 					/>
 					<p class="text-sm text-slate-500 mt-4">

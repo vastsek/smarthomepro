@@ -1,5 +1,6 @@
 ---
 // Αρχείο: src/pages/projects/[slug].astro
+import { Image, getImage } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { projects } from '../../data/projects';
 import ProjectPlaceholder from '../../components/ProjectPlaceholder.astro';
@@ -13,12 +14,17 @@ export function getStaticPaths() {
 
 const { project } = Astro.props;
 const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+
+// og:image: βελτιστοποιημένη εκδοχή (JPEG, max 1200px) της πρώτης εικόνας του gallery.
+const ogImage = project.gallery[0]
+	? (await getImage({ src: project.gallery[0].src, width: Math.min(1200, project.gallery[0].src.width), format: 'jpeg' })).src
+	: undefined;
 ---
 
 <Layout
 	title={`${project.title} | Έργα SmartHomePro`}
 	description={project.description}
-	ogImage={project.gallery[0]?.src}
+	ogImage={ogImage}
 >
 	<main class="pt-40 pb-24">
 		<div class="container mx-auto px-6 max-w-5xl">
@@ -58,9 +64,12 @@ const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3
 									{fit === 'contain' && (
 										<div class="absolute w-40 h-40 bg-teal-500/20 rounded-full blur-3xl"></div>
 									)}
-									<img
+									<Image
 										src={img.src}
 										alt={img.caption}
+										widths={[480, 768, 1024]}
+										sizes="(min-width: 768px) 50vw, 100vw"
+										loading="lazy"
 										class:list={["", fit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
 									/>
 								</div>
@@ -131,9 +140,12 @@ const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3
 											{p.imageFit === 'contain' && (
 												<div class="absolute w-32 h-32 bg-teal-500/20 rounded-full blur-3xl"></div>
 											)}
-											<img
+											<Image
 												src={p.gallery[0].src}
 												alt={p.title}
+												widths={[320, 480, 640]}
+												sizes="(min-width: 768px) 33vw, 100vw"
+												loading="lazy"
 												class:list={["transition-transform duration-700 group-hover:scale-110", p.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
 											/>
 										</Fragment>

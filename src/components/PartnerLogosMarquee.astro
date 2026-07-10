@@ -1,18 +1,19 @@
 ---
 // Αρχείο: src/components/PartnerLogosMarquee.astro
 // Εναλλακτική εκδοχή του PartnerLogos.astro με κυλιόμενη ταινία (infinite scroll) σε μία σειρά.
+// width/height: πραγματικές διαστάσεις των PNG (όλα ύψους 240px) για σωστό aspect-ratio reservation.
 const logos = [
-	{ file: 'abb.png', name: 'ABB' },
-	{ file: 'ekinex.png', name: 'Ekinex' },
-	{ file: 'theben.png', name: 'Theben' },
-	{ file: 'comfort-click.png', name: 'Comfort Click' },
-	{ file: 'home-assistant.png', name: 'Home Assistant' },
-	{ file: 'hitachi.png', name: 'Hitachi' },
-	{ file: 'hikvision.png', name: 'Hikvision' },
-	{ file: 'paradox.png', name: 'Paradox' },
-	{ file: 'ubiquiti.png', name: 'Ubiquiti' },
-	{ file: 'yealink.png', name: 'Yealink' },
-	{ file: 'yeastar.png', name: 'Yeastar' },
+	{ file: 'abb.png', name: 'ABB', width: 582 },
+	{ file: 'ekinex.png', name: 'Ekinex', width: 780 },
+	{ file: 'theben.png', name: 'Theben', width: 657 },
+	{ file: 'comfort-click.png', name: 'Comfort Click', width: 1358 },
+	{ file: 'home-assistant.png', name: 'Home Assistant', width: 1424 },
+	{ file: 'hitachi.png', name: 'Hitachi', width: 1257 },
+	{ file: 'hikvision.png', name: 'Hikvision', width: 1003 },
+	{ file: 'paradox.png', name: 'Paradox', width: 953 },
+	{ file: 'ubiquiti.png', name: 'Ubiquiti', width: 313 },
+	{ file: 'yealink.png', name: 'Yealink', width: 1010 },
+	{ file: 'yeastar.png', name: 'Yeastar', width: 751 },
 ];
 ---
 
@@ -29,6 +30,9 @@ const logos = [
 				<img
 					src={`/images/partners/${logo.file}`}
 					alt={logo.name}
+					width={logo.width}
+					height={240}
+					loading="lazy"
 					class="h-8 md:h-10 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300 shrink-0"
 				/>
 			))}

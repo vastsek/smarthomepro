@@ -3,15 +3,21 @@
 //
 // Hero: πραγματική φωτογραφία από το έργο στη Γλυφάδα (εξωτερική πισίνα με
 // RGB υποβρύχιο φωτισμό). Αν θέλεις να το αλλάξεις, αντικατέστησε το
-// public/images/hero-pool.jpg (ή δείξε σε άλλο αρχείο) και ενημέρωσε
+// src/assets/images/hero-pool.jpg (ή δείξε σε άλλο αρχείο) και ενημέρωσε
 // αντίστοιχα το ogImage στο src/layouts/Layout.astro για το social preview.
+import { Image } from 'astro:assets';
+import heroPool from '../assets/images/hero-pool.jpg';
 ---
 
 <section class="relative h-screen w-full flex items-center justify-center overflow-hidden">
     <div class="absolute inset-0 z-0">
-        <img
-            src="/images/hero-pool.jpg"
+        <Image
+            src={heroPool}
             alt="Έξυπνη κατοικία με αυτοματισμό KNX και φωτισμό πισίνας στη Γλυφάδα"
+            widths={[640, 1024, 1600, heroPool.width]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
             class="w-full h-full object-cover"
         />
         <div class="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/45 to-slate-900/80"></div>

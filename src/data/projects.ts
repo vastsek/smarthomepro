@@ -2,10 +2,26 @@
 //
 // Οι εικόνες των 3 KNX έργων (Φιλοθέη, Γλυφάδα, Άγ. Δημήτριος) είναι screenshots
 // του mobile app ελέγχου — δεν υπάρχουν ακόμα πραγματικές φωτογραφίες του χώρου.
-// Πρόσθεσε νέες φωτογραφίες απλά προσθέτοντας entries στο αντίστοιχο `gallery` array.
+// Πρόσθεσε νέες φωτογραφίες: βάλε το αρχείο στο src/assets/images/projects/<έργο>/
+// και πρόσθεσε entry στο αντίστοιχο `gallery` array με img('<έργο>/<αρχείο>').
+
+import type { ImageMetadata } from 'astro';
+
+// Όλες οι εικόνες έργων φορτώνονται από το src/assets ώστε να περνούν από το
+// Astro image optimization (WebP, srcset, width/height).
+const projectImages = import.meta.glob<{ default: ImageMetadata }>(
+	'../assets/images/projects/**/*.{jpg,png}',
+	{ eager: true }
+);
+
+function img(path: string): ImageMetadata {
+	const mod = projectImages[`../assets/images/projects/${path}`];
+	if (!mod) throw new Error(`Λείπει η εικόνα έργου: src/assets/images/projects/${path}`);
+	return mod.default;
+}
 
 export interface GalleryImage {
-	src: string;
+	src: ImageMetadata;
 	caption: string;
 	// Παρακάμπτει το imageFit του έργου για τη συγκεκριμένη εικόνα.
 	// Χρήσιμο όταν σε ένα gallery συνυπάρχουν φωτογραφίες (cover) με
@@ -94,12 +110,12 @@ export const projects: Project[] = [
 		longDescription: 'Ολοκληρωμένη εγκατάσταση KNX σε μονοκατοικία, με ενοποιημένο έλεγχο μέσω Home Assistant. Η οικογένεια διαχειρίζεται φωτισμό, θέρμανση ανά όροφο, γκαραζόπορτα και πισίνα (φωτισμός RGB, θέρμανση, ποιότητα νερού) μέσα από ένα ενιαίο mobile dashboard, με ζωντανή εικόνα από κάμερα ασφαλείας.',
 		imageFit: 'contain',
 		gallery: [
-			{ src: '/images/projects/filothei/mobile-app-ha-photo5.jpg', caption: 'Κεντρικό dashboard με γρήγορη πρόσβαση σε όλες τις λειτουργίες' },
-			{ src: '/images/projects/filothei/mobile-app-ha-photo1.jpg', caption: 'Γκαραζόπορτα, καιρός και ζωντανή εικόνα κάμερας' },
-			{ src: '/images/projects/filothei/mobile-app-ha-photo2.jpg', caption: 'Φωτισμός πισίνας (RGB) και θέρμανση πισίνας' },
-			{ src: '/images/projects/filothei/mobile-app-ha-photo4.jpg', caption: 'Θέρμανση ανά όροφο (υπόγειο, ισόγειο, 1ος, 2ος)' },
-			{ src: '/images/projects/filothei/mobile-app-ha-photo3.jpg', caption: 'Ξεχωριστός έλεγχος φωτισμού ανά δωμάτιο' },
-			{ src: '/images/projects/filothei/mobile-app-ha-photo6.jpg', caption: 'Αναλυτικός έλεγχος φωτισμού κήπου και κύριου ορόφου' },
+			{ src: img('filothei/mobile-app-ha-photo5.jpg'), caption: 'Κεντρικό dashboard με γρήγορη πρόσβαση σε όλες τις λειτουργίες' },
+			{ src: img('filothei/mobile-app-ha-photo1.jpg'), caption: 'Γκαραζόπορτα, καιρός και ζωντανή εικόνα κάμερας' },
+			{ src: img('filothei/mobile-app-ha-photo2.jpg'), caption: 'Φωτισμός πισίνας (RGB) και θέρμανση πισίνας' },
+			{ src: img('filothei/mobile-app-ha-photo4.jpg'), caption: 'Θέρμανση ανά όροφο (υπόγειο, ισόγειο, 1ος, 2ος)' },
+			{ src: img('filothei/mobile-app-ha-photo3.jpg'), caption: 'Ξεχωριστός έλεγχος φωτισμού ανά δωμάτιο' },
+			{ src: img('filothei/mobile-app-ha-photo6.jpg'), caption: 'Αναλυτικός έλεγχος φωτισμού κήπου και κύριου ορόφου' },
 		],
 	},
 	{
@@ -112,18 +128,18 @@ export const projects: Project[] = [
 		longDescription: 'Πλήρης αυτοματισμός σύγχρονης μονοκατοικίας με σύστημα KNX και οπτικοποίηση μέσω ComfortClick. Η εγκατάσταση συνδυάζει κομψά keypads της ABB, εναρμονισμένα με τα υλικά του χώρου, με αρχιτεκτονικό κρυφό φωτισμό LED, μηχανοκίνητες κουρτίνες, σενάρια φωτισμού, θέρμανση Daikin ανά όροφο και έλεγχο της εξωτερικής πισίνας με RGB υποβρύχιο φωτισμό. Ενσωματώθηκε επίσης σύστημα ασφαλείας και θυροτηλεόρασης Paradox, όλα προσβάσιμα από ένα ενιαίο interface.',
 		imageFit: 'cover',
 		gallery: [
-			{ src: '/images/projects/glyfada/pool-night.jpg', caption: 'Εξωτερική πισίνα με RGB υποβρύχιο φωτισμό, ενταγμένη στον αυτοματισμό του σπιτιού' },
-			{ src: '/images/projects/glyfada/bedroom-headboard.jpg', caption: 'Κρεβατοκάμαρα: κρυφός φωτισμός κεφαλαριού και διακριτικά κρεμαστά φωτιστικά' },
-			{ src: '/images/projects/glyfada/entrance-night.jpg', caption: 'Είσοδος με αρχιτεκτονικό κρυφό LED και ενσωματωμένη κάμερα ασφαλείας' },
-			{ src: '/images/projects/glyfada/bedroom-curtains.jpg', caption: 'Μηχανοκίνητες κουρτίνες (διπλό στρώμα) και σενάριο φωτισμού βραδιού' },
-			{ src: '/images/projects/glyfada/kids-room.jpg', caption: 'Παιδικό δωμάτιο με κρυφό φωτισμό LED σε ραφιέρα και γραφείο' },
-			{ src: '/images/projects/glyfada/keypad-detail.jpg', caption: 'Κομψό KNX keypad της ABB, εναρμονισμένο με τα υλικά του χώρου' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo1.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός σπιτιού ανά χώρο (είσοδος, σκάλες, σαλόνι, υπόγειο)', fit: 'contain' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo2.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός εισόδου με ξεχωριστό έλεγχο ασφαλείας', fit: 'contain' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo3.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός κήπου και πισίνας', fit: 'contain' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo4.jpg', caption: 'Οπτικοποίηση ComfortClick: φωτισμός και έλεγχος πάρκινγκ', fit: 'contain' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo5.jpg', caption: 'Οπτικοποίηση ComfortClick: έλεγχος ρολών ανά δωμάτιο', fit: 'contain' },
-			{ src: '/images/projects/glyfada/mobile-app-cc-photo6.jpg', caption: 'Οπτικοποίηση ComfortClick: θερμοστάτης ορόφου (HVAC)', fit: 'contain' },
+			{ src: img('glyfada/pool-night.jpg'), caption: 'Εξωτερική πισίνα με RGB υποβρύχιο φωτισμό, ενταγμένη στον αυτοματισμό του σπιτιού' },
+			{ src: img('glyfada/bedroom-headboard.jpg'), caption: 'Κρεβατοκάμαρα: κρυφός φωτισμός κεφαλαριού και διακριτικά κρεμαστά φωτιστικά' },
+			{ src: img('glyfada/entrance-night.jpg'), caption: 'Είσοδος με αρχιτεκτονικό κρυφό LED και ενσωματωμένη κάμερα ασφαλείας' },
+			{ src: img('glyfada/bedroom-curtains.jpg'), caption: 'Μηχανοκίνητες κουρτίνες (διπλό στρώμα) και σενάριο φωτισμού βραδιού' },
+			{ src: img('glyfada/kids-room.jpg'), caption: 'Παιδικό δωμάτιο με κρυφό φωτισμό LED σε ραφιέρα και γραφείο' },
+			{ src: img('glyfada/keypad-detail.jpg'), caption: 'Κομψό KNX keypad της ABB, εναρμονισμένο με τα υλικά του χώρου' },
+			{ src: img('glyfada/mobile-app-cc-photo1.jpg'), caption: 'Οπτικοποίηση ComfortClick: φωτισμός σπιτιού ανά χώρο (είσοδος, σκάλες, σαλόνι, υπόγειο)', fit: 'contain' },
+			{ src: img('glyfada/mobile-app-cc-photo2.jpg'), caption: 'Οπτικοποίηση ComfortClick: φωτισμός εισόδου με ξεχωριστό έλεγχο ασφαλείας', fit: 'contain' },
+			{ src: img('glyfada/mobile-app-cc-photo3.jpg'), caption: 'Οπτικοποίηση ComfortClick: φωτισμός κήπου και πισίνας', fit: 'contain' },
+			{ src: img('glyfada/mobile-app-cc-photo4.jpg'), caption: 'Οπτικοποίηση ComfortClick: φωτισμός και έλεγχος πάρκινγκ', fit: 'contain' },
+			{ src: img('glyfada/mobile-app-cc-photo5.jpg'), caption: 'Οπτικοποίηση ComfortClick: έλεγχος ρολών ανά δωμάτιο', fit: 'contain' },
+			{ src: img('glyfada/mobile-app-cc-photo6.jpg'), caption: 'Οπτικοποίηση ComfortClick: θερμοστάτης ορόφου (HVAC)', fit: 'contain' },
 		],
 	},
 	{
@@ -136,10 +152,10 @@ export const projects: Project[] = [
 		longDescription: 'Αυτοματισμός φωτισμού σε επαγγελματικό χώρο με εξοπλισμό ABB, σχεδιασμένος γύρω από την καθημερινή λειτουργία ενός γραφείου: ξεχωριστός έλεγχος για γραφεία, αποθήκη, κήπο και εξωτερικούς χώρους, με εύκολη πρόσβαση μέσω mobile app για το προσωπικό.',
 		imageFit: 'contain',
 		gallery: [
-			{ src: '/images/projects/ag-dimitrios/mobile-app-abb-photo2.png', caption: 'Φωτισμός γραφείων μηχανικών' },
-			{ src: '/images/projects/ag-dimitrios/mobile-app-abb-photo1.png', caption: 'Φωτισμός αποθήκης ανά διάδρομο' },
-			{ src: '/images/projects/ag-dimitrios/mobile-app-abb-photo3.png', caption: 'Φωτισμός κήπου' },
-			{ src: '/images/projects/ag-dimitrios/mobile-app-abb-photo4.png', caption: 'Εξωτερικός φωτισμός κτιρίου' },
+			{ src: img('ag-dimitrios/mobile-app-abb-photo2.png'), caption: 'Φωτισμός γραφείων μηχανικών' },
+			{ src: img('ag-dimitrios/mobile-app-abb-photo1.png'), caption: 'Φωτισμός αποθήκης ανά διάδρομο' },
+			{ src: img('ag-dimitrios/mobile-app-abb-photo3.png'), caption: 'Φωτισμός κήπου' },
+			{ src: img('ag-dimitrios/mobile-app-abb-photo4.png'), caption: 'Εξωτερικός φωτισμός κτιρίου' },
 		],
 	},
 	{
@@ -152,8 +168,8 @@ export const projects: Project[] = [
 		longDescription: 'Πλήρης εγκατάσταση δικτυακής υποδομής σε τεχνικό γραφείο: τερματισμός γραμμών δομημένης καλωδίωσης CAT.6+, καμπίνα rack με patch panels, network switch, VPN router και NAS, οργανωμένα για εύκολη μελλοντική επέκταση και συντήρηση.',
 		imageFit: 'cover',
 		gallery: [
-			{ src: '/images/projects/vyronas/rack-photo1.jpg', caption: 'Καμπίνα rack με πλήρη δικτυακό εξοπλισμό' },
-			{ src: '/images/projects/vyronas/networks-photo1.jpg', caption: 'Επαγγελματικός δικτυακός εξοπλισμός (TP-Link Omada)' },
+			{ src: img('vyronas/rack-photo1.jpg'), caption: 'Καμπίνα rack με πλήρη δικτυακό εξοπλισμό' },
+			{ src: img('vyronas/networks-photo1.jpg'), caption: 'Επαγγελματικός δικτυακός εξοπλισμός (TP-Link Omada)' },
 		],
 	},
 	{
@@ -166,9 +182,9 @@ export const projects: Project[] = [
 		longDescription: 'Εγκατάσταση συστήματος CCTV σε καταστήματα αλυσίδας ρούχων, με πολλαπλές κάμερες ανά κατάστημα και κεντρική διαχείριση μέσω DVR. Η διαχείριση παρακολουθεί ζωντανά όλα τα σημεία ταυτόχρονα, με δυνατότητα απομακρυσμένης πρόσβασης από κινητό ή υπολογιστή.',
 		imageFit: 'cover',
 		gallery: [
-			{ src: '/images/projects/sepolia/dvr-liveview-photo1.jpg', caption: 'Ζωντανή προβολή από 4 κάμερες ταυτόχρονα' },
-			{ src: '/images/projects/sepolia/cameras-photo1.jpg', caption: 'Κάμερα ασφαλείας εγκατεστημένη σε κατάστημα' },
-			{ src: '/images/projects/sepolia/cameras-photo2.jpg', caption: 'Κάλυψη εισόδου και χώρου καταστήματος' },
+			{ src: img('sepolia/dvr-liveview-photo1.jpg'), caption: 'Ζωντανή προβολή από 4 κάμερες ταυτόχρονα' },
+			{ src: img('sepolia/cameras-photo1.jpg'), caption: 'Κάμερα ασφαλείας εγκατεστημένη σε κατάστημα' },
+			{ src: img('sepolia/cameras-photo2.jpg'), caption: 'Κάλυψη εισόδου και χώρου καταστήματος' },
 		],
 	},
 ];
