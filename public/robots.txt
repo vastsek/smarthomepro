@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://smarthomepro.gr/sitemap-index.xml
