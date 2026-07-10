@@ -1,0 +1,47 @@
+---
+// Αρχείο: src/pages/efxaristoume.astro
+// Σελίδα ευχαριστίας μετά την υποβολή της φόρμας επικοινωνίας (Netlify Forms).
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+	title="Ευχαριστούμε | SmartHomePro"
+	description="Λάβαμε το μήνυμά σας. Θα επικοινωνήσουμε μαζί σας το συντομότερο δυνατό."
+	noindex={true}
+>
+	<main>
+		<section class="bg-dotted min-h-screen flex items-center justify-center py-32 px-6">
+			<div class="max-w-xl w-full text-center">
+
+				<div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-teal-50 text-teal-600 mb-8">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-10 h-10">
+						<path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+					</svg>
+				</div>
+
+				<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mb-4">
+					Λάβαμε το μήνυμά σας
+				</h1>
+				<p class="text-slate-600 text-lg mb-8">
+					Σας ευχαριστούμε για την επικοινωνία. Η ομάδα μας θα σας απαντήσει το συντομότερο δυνατό, συνήθως εντός 24 ωρών.
+				</p>
+
+				<p class="text-slate-600 mb-10">
+					Χρειάζεστε άμεση εξυπηρέτηση; Καλέστε μας στο
+					<a href="tel:+302102200607" class="font-bold text-teal-600 hover:text-teal-700 transition-colors whitespace-nowrap">210 220 0607</a>
+					(Δευτέρα - Παρασκευή, 09:00 - 17:00).
+				</p>
+
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="/" class="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold rounded-lg hover:from-emerald-400 hover:to-teal-500 transition-all shadow-lg shadow-teal-600/20">
+						Επιστροφή στην αρχική
+					</a>
+					<a href="/blog/" class="px-8 py-4 bg-white text-slate-900 font-bold rounded-lg border border-slate-200 hover:border-teal-500 hover:text-teal-600 transition-all">
+						Διαβάστε το blog μας
+					</a>
+				</div>
+
+			</div>
+		</section>
+	</main>
+</Layout>

@@ -6,5 +6,11 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://smarthomepro.gr',
-  integrations: [tailwind(), sitemap()],
+  integrations: [
+    tailwind(),
+    sitemap({
+      // Εξαίρεση της σελίδας ευχαριστίας (noindex) από το sitemap.
+      filter: (page) => !page.includes('/efxaristoume/'),
+    }),
+  ],
 });
