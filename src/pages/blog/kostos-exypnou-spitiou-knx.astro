@@ -4,14 +4,17 @@
 // Πρέπει να αντικατασταθούν με πραγματικά νούμερα βάσει της εμπειρίας σας πριν το δημοσιεύσετε.
 import Layout from '../../layouts/Layout.astro';
 
+const title = 'Πόσο κοστίζει ένα έξυπνο σπίτι με KNX;';
+
 const publishDate = '2026-07-05';
 const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <Layout
-	title="Πόσο κοστίζει ένα έξυπνο σπίτι με KNX; | SmartHomePro"
+	title={`${title} | SmartHomePro`}
 	publishDate={publishDate}
 	description="Αναλυτικός οδηγός κόστους για smart home KNX: τι επηρεάζει την τιμή, ενδεικτικά εύρη ανά μέγεθος κατοικίας, και πώς να συγκρίνετε σωστά προσφορές."
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Blog', url: '/blog/' }, { name: title }]}
 >
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">

@@ -15,7 +15,13 @@ const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 
 const ogImage = (await getImage({ src: houseOfTheFuture, width: Math.min(1200, houseOfTheFuture.width), format: 'jpeg' })).src;
 ---
 
-<Layout title={title} description={description} publishDate={publishDate} ogImage={ogImage}>
+<Layout
+	title={title}
+	description={description}
+	publishDate={publishDate}
+	ogImage={ogImage}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Blog', url: '/blog/' }, { name: title }]}
+>
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">
 

@@ -9,7 +9,12 @@ const publishDate = '2026-07-09';
 const formattedDate = new Date(publishDate).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
-<Layout title={`${title} | SmartHomePro`} description={description} publishDate={publishDate}>
+<Layout
+	title={`${title} | SmartHomePro`}
+	description={description}
+	publishDate={publishDate}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Blog', url: '/blog/' }, { name: title }]}
+>
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">
 

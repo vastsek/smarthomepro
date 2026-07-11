@@ -21,7 +21,12 @@ const rows = [
 ];
 ---
 
-<Layout title={`${title} | SmartHomePro`} description={description} publishDate={publishDate}>
+<Layout
+	title={`${title} | SmartHomePro`}
+	description={description}
+	publishDate={publishDate}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Blog', url: '/blog/' }, { name: title }]}
+>
 	<main class="pt-40 pb-24">
 		<article class="container mx-auto px-6 max-w-3xl">
 

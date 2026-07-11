@@ -17,9 +17,12 @@ interface Props {
 	noindex?: boolean;
 	// Per-page εικόνα για og:image/twitter:image/BlogPosting (path σχετικό με το site, π.χ. /images/blog/foo.jpg).
 	ogImage?: string;
+	// Μονοπάτι πλοήγησης για BreadcrumbList schema (π.χ. Αρχική → Έργα → τίτλος).
+	// Το τελευταίο στοιχείο (τρέχουσα σελίδα) δεν χρειάζεται url.
+	breadcrumbs?: { name: string; url?: string }[];
 }
 
-const { title, description: descriptionProp, publishDate, noindex, ogImage: ogImageProp } = Astro.props;
+const { title, description: descriptionProp, publishDate, noindex, ogImage: ogImageProp, breadcrumbs } = Astro.props;
 
 // Εδώ ορίζουμε την περιγραφή που θα φαίνεται στη Google
 // (τώρα μπορεί να διαφέρει ανά σελίδα μέσω του description prop)
@@ -48,6 +51,18 @@ const blogPostingSchema = isArticle ? {
 		"logo": { "@type": "ImageObject", "url": siteUrl + "/images/SmartHomePro_Hor_B.png" }
 	},
 	"mainEntityOfPage": { "@type": "WebPage", "@id": pageUrl }
+} : null;
+
+// BreadcrumbList schema — παράγεται μόνο όταν η σελίδα δώσει breadcrumbs.
+const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
+	"@context": "https://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": breadcrumbs.map((crumb, i) => ({
+		"@type": "ListItem",
+		"position": i + 1,
+		"name": crumb.name,
+		...(crumb.url ? { "item": new URL(crumb.url, siteUrl).href } : {}),
+	})),
 } : null;
 
 const localBusinessSchema = {
@@ -119,6 +134,9 @@ const localBusinessSchema = {
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
         {blogPostingSchema && (
             <script type="application/ld+json" set:html={JSON.stringify(blogPostingSchema)} />
+        )}
+        {breadcrumbSchema && (
+            <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
         )}
 
         <style is:global>
