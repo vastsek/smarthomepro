@@ -15,9 +15,12 @@ export function getStaticPaths() {
 const { project } = Astro.props;
 const otherProjects = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
 
-// og:image: βελτιστοποιημένη εκδοχή (JPEG, max 1200px) της πρώτης εικόνας του gallery.
-const ogImage = project.gallery[0]
-	? (await getImage({ src: project.gallery[0].src, width: Math.min(1200, project.gallery[0].src.width), format: 'jpeg' })).src
+// og:image: το πρώτο ΟΡΙΖΟΝΤΙΟ gallery image με επαρκές πλάτος (τα social
+// απορρίπτουν κατακόρυφα/μικρά, π.χ. screenshots κινητού — min ~600px πλάτος).
+// Αν δεν υπάρχει κατάλληλο, μένει το default og-cover του Layout.
+const ogSource = project.gallery.find((g) => g.src.width >= 600 && g.src.width > g.src.height)?.src;
+const ogImage = ogSource
+	? (await getImage({ src: ogSource, width: Math.min(1200, ogSource.width), format: 'jpeg' })).src
 	: undefined;
 ---
 
