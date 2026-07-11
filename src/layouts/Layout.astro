@@ -1,5 +1,10 @@
 ---
 // Αρχείο: src/layouts/Layout.astro
+// Self-hosted Inter (latin + greek subsets μέσω unicode-range) αντί για Google Fonts CDN.
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/inter/800.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 
@@ -93,10 +98,6 @@ const localBusinessSchema = {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
         <!-- Structured data: βοηθάει τη Google να καταλάβει επιχείρηση/τοποθεσία/υπηρεσίες -->
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />

@@ -27,7 +27,7 @@
             Κλείστε Ραντεβού
         </a>
 
-        <button id="menu-btn" class="lg:hidden text-slate-900 z-50 focus:outline-none p-2 relative">
+        <button id="menu-btn" aria-label="Μενού πλοήγησης" aria-expanded="false" aria-controls="mobile-menu" class="lg:hidden text-slate-900 z-50 focus:outline-none p-2 relative">
             <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
             </svg>
@@ -68,11 +68,13 @@
             mobileMenu?.classList.remove('opacity-0', 'pointer-events-none');
             iconOpen?.classList.add('hidden');
             iconClose?.classList.remove('hidden');
+            menuBtn?.setAttribute('aria-expanded', 'true');
             document.body.style.overflow = 'hidden';
         } else {
             mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
             iconOpen?.classList.remove('hidden');
             iconClose?.classList.add('hidden');
+            menuBtn?.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         }
     });
@@ -83,6 +85,7 @@
             mobileMenu?.classList.add('opacity-0', 'pointer-events-none');
             iconOpen?.classList.remove('hidden');
             iconClose?.classList.add('hidden');
+            menuBtn?.setAttribute('aria-expanded', 'false');
             document.body.style.overflow = '';
         });
     });
