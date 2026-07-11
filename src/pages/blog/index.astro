@@ -1,40 +1,16 @@
 ---
 // Αρχείο: src/pages/blog/index.astro
+// Η λίστα παράγεται αυτόματα από το collection «blog» (src/content/blog/*.mdx),
+// ταξινομημένη από το νεότερο στο παλαιότερο.
+import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const posts = [
-	{
-		slug: 'knx-vs-asyrmato',
-		title: 'KNX ή ασύρματο έξυπνο σπίτι; Τι να επιλέξετε',
-		excerpt: 'Ενσύρματο KNX ή ασύρματα «smart» προϊόντα (Wi-Fi, Zigbee, Shelly); Ειλικρινής σύγκριση σε αξιοπιστία, κόστος, διάρκεια και ασφάλεια — για να επιλέξετε σωστά.',
-		date: '2026-07-09',
-		category: 'Σύγκριση',
-	},
-	{
-		slug: 'ti-einai-to-knx',
-		title: 'Τι είναι το KNX; Ο πλήρης οδηγός για το έξυπνο σπίτι',
-		excerpt: 'Τι είναι το KNX, πώς λειτουργεί και γιατί αποτελεί το διεθνές πρότυπο για ένα αξιόπιστο, μακρόχρονο έξυπνο σπίτι — εξηγημένο με απλά λόγια.',
-		date: '2026-07-09',
-		category: 'Τεχνολογία KNX',
-	},
-	{
-		slug: 'prasino-spiti-knx',
-		title: 'Πώς το KNX κάνει το σπίτι σου πιο "πράσινο"',
-		excerpt: 'Πώς ο αυτοματισμός KNX μειώνει την ενεργειακή κατανάλωση μέσω έξυπνου ελέγχου θέρμανσης, φωτισμού και σκίασης, και πώς ενσωματώνεται με ηλιακά και αντλίες θερμότητας.',
-		date: '2026-07-06',
-		category: 'Ενέργεια & Βιωσιμότητα',
-	},
-	{
-		slug: 'kostos-exypnou-spitiou-knx',
-		title: 'Πόσο κοστίζει ένα έξυπνο σπίτι με KNX;',
-		excerpt: 'Αναλυτικός οδηγός κόστους για συστήματα οικιακού αυτοματισμού KNX: τι επηρεάζει την τιμή, ενδεικτικά εύρη κόστους ανά μέγεθος κατοικίας και πώς να ζητήσετε σωστή προσφορά.',
-		date: '2026-07-05',
-		category: 'Κόστος & Σχεδιασμός',
-	},
-];
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
 
-const formatDate = (iso: string) =>
-	new Date(iso).toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
+const formatDate = (date: Date) =>
+	date.toLocaleDateString('el-GR', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <Layout
@@ -56,19 +32,19 @@ const formatDate = (iso: string) =>
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 				{posts.map((post) => (
-					<a href={`/blog/${post.slug}/`} class="group block">
+					<a href={`/blog/${post.id}/`} class="group block">
 						<div class="p-8 rounded-xl border border-slate-100 bg-slate-50 hover:bg-white hover:shadow-xl hover:shadow-slate-900/5 transition-all h-full flex flex-col">
 							<div class="flex items-center gap-3 text-sm text-teal-600 font-medium mb-4">
-								<span>{post.category}</span>
+								<span>{post.data.category}</span>
 							</div>
 							<h2 class="text-2xl font-bold text-slate-900 mb-3 group-hover:text-teal-600 transition-colors">
-								{post.title}
+								{post.data.title}
 							</h2>
 							<p class="text-slate-500 mb-6 flex-1">
-								{post.excerpt}
+								{post.data.excerpt}
 							</p>
 							<div class="flex items-center justify-between text-sm text-slate-400">
-								<time datetime={post.date}>{formatDate(post.date)}</time>
+								<time datetime={post.data.publishDate.toISOString().slice(0, 10)}>{formatDate(post.data.publishDate)}</time>
 								<span class="flex items-center gap-2 text-slate-900 font-semibold group-hover:text-teal-600 transition-colors">
 									Διαβάστε
 									<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">

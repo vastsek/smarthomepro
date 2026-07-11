@@ -29,9 +29,11 @@
 src/
 ├── assets/images/    # Εικόνες περιεχομένου (περνούν από astro:assets → WebP/srcset)
 ├── components/       # Hero, Header, Footer, Contact, Projects, Stats κ.λπ.
+├── content/blog/     # Τα blog posts (.mdx με frontmatter) — Content Collection
+├── content.config.ts # Schema του blog collection
 ├── data/projects.ts  # Τα έργα (portfolio) — ΕΝΑ αρχείο για όλα
 ├── layouts/Layout.astro  # Κοινό layout: meta, OG, JSON-LD schemas, fonts
-└── pages/            # index, projects/, blog/, efxaristoume, 404
+└── pages/            # index, projects/, blog/ (index + [slug]), efxaristoume, 404
 public/images/        # Λογότυπα & partner logos (σερβίρονται αυτούσια)
 ```
 
@@ -51,12 +53,14 @@ public/images/        # Λογότυπα & partner logos (σερβίρονται
 
 ## Πώς προσθέτω νέο blog post
 
-1. Αντίγραψε ένα υπάρχον αρχείο από `src/pages/blog/` (π.χ.
-   `ti-einai-to-knx.astro`) με νέο όνομα-slug.
-2. Ενημέρωσε `title`, `description`, `publishDate` και το περιεχόμενο.
-   Το `publishDate` παράγει αυτόματα το BlogPosting schema. Πέρασε και
-   `breadcrumbs` + προαιρετικά `ogImage` (δες το `prasino-spiti-knx.astro`).
-3. Πρόσθεσε το post στη λίστα `posts` του `src/pages/blog/index.astro`.
+1. Δημιούργησε `src/content/blog/<slug>.mdx` (το όνομα αρχείου γίνεται το URL:
+   `/blog/<slug>/`). Ξεκίνα αντιγράφοντας ένα υπάρχον post.
+2. Συμπλήρωσε το frontmatter: `title`, `description`, `excerpt` (για την
+   κάρτα της λίστας), `category`, `publishDate`, `cta` (κείμενα του box στο
+   τέλος) και προαιρετικά `ogImage` (εικόνα από `src/assets/images/blog/`)
+   και `faqs` (παράγουν FAQPage schema).
+3. Γράψε το περιεχόμενο κάτω από το frontmatter. Αυτό ήταν — η λίστα του
+   blog, τα meta, τα breadcrumbs και τα schemas παράγονται αυτόματα.
 
 ## SEO
 
