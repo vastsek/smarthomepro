@@ -1,0 +1,91 @@
+# Netlify configuration
+#
+# 301 redirects για τη μετάβαση από το παλιό brand/site (bitautomations.gr)
+# στο smarthomepro.gr. Προϋπόθεση: το bitautomations.gr (και το www) έχουν
+# προστεθεί ως domain aliases στο ίδιο Netlify site (Domain management →
+# Add domain alias) και τα DNS web records του παλιού domain δείχνουν στο Netlify.
+#
+# Mapping παλιών σελίδων → νέων:
+#   /smart-home/  → αρχική (ενότητα υπηρεσιών)
+#   /services/    → αρχική (ενότητα υπηρεσιών)
+#   /projects/    → /projects/
+#   /about/       → αρχική (ενότητα επικοινωνίας)
+#   οτιδήποτε άλλο → αρχική
+
+# --- bitautomations.gr (apex) ---
+
+[[redirects]]
+  from = "https://bitautomations.gr/smart-home/*"
+  to = "https://smarthomepro.gr/#services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://bitautomations.gr/services/*"
+  to = "https://smarthomepro.gr/#services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://bitautomations.gr/projects/*"
+  to = "https://smarthomepro.gr/projects/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://bitautomations.gr/about/*"
+  to = "https://smarthomepro.gr/#contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://bitautomations.gr/*"
+  to = "https://smarthomepro.gr/"
+  status = 301
+  force = true
+
+# --- www.bitautomations.gr ---
+
+[[redirects]]
+  from = "https://www.bitautomations.gr/smart-home/*"
+  to = "https://smarthomepro.gr/#services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bitautomations.gr/services/*"
+  to = "https://smarthomepro.gr/#services"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bitautomations.gr/projects/*"
+  to = "https://smarthomepro.gr/projects/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bitautomations.gr/about/*"
+  to = "https://smarthomepro.gr/#contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.bitautomations.gr/*"
+  to = "https://smarthomepro.gr/"
+  status = 301
+  force = true
+
+# --- http εκδοχές (το Netlify κάνει ήδη http→https, αλλά για σιγουριά) ---
+
+[[redirects]]
+  from = "http://bitautomations.gr/*"
+  to = "https://smarthomepro.gr/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.bitautomations.gr/*"
+  to = "https://smarthomepro.gr/"
+  status = 301
+  force = true
