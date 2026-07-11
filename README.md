@@ -1,43 +1,66 @@
-# Astro Starter Kit: Minimal
+# smarthomepro.gr
 
-```sh
-npm create astro@latest -- --template minimal
-```
+Εταιρικό site της **SmartHomePro** (πρώην biT Automations) — λύσεις έξυπνου
+σπιτιού KNX, μελέτη/εγκατάσταση αυτοματισμών και ασθενή ρεύματα στην Αθήνα
+και την Αττική.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Stack
 
-## 🚀 Project Structure
+- [Astro 5](https://astro.build) — static site (SSG), χωρίς JS framework
+- [Tailwind CSS 3](https://tailwindcss.com)
+- Self-hosted Inter μέσω `@fontsource/inter`
+- Hosting: **Netlify** (auto-deploy από το `main` branch)
+- Φόρμα επικοινωνίας: Netlify Forms (σελίδα ευχαριστίας `/efxaristoume/`)
+- Το `netlify.toml` περιέχει τα 301 redirects από το παλιό domain
+  bitautomations.gr (domain alias στο ίδιο Netlify site)
 
-Inside of your Astro project, you'll see the following folders and files:
+## Εντολές
+
+| Εντολή            | Τι κάνει                                     |
+| :---------------- | :------------------------------------------- |
+| `npm install`     | Εγκατάσταση dependencies                      |
+| `npm run dev`     | Dev server στο `localhost:4321`               |
+| `npm run build`   | Production build στο `./dist/`                |
+| `npm run preview` | Τοπικό preview του build                      |
+
+## Δομή
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+├── assets/images/    # Εικόνες περιεχομένου (περνούν από astro:assets → WebP/srcset)
+├── components/       # Hero, Header, Footer, Contact, Projects, Stats κ.λπ.
+├── data/projects.ts  # Τα έργα (portfolio) — ΕΝΑ αρχείο για όλα
+├── layouts/Layout.astro  # Κοινό layout: meta, OG, JSON-LD schemas, fonts
+└── pages/            # index, projects/, blog/, efxaristoume, 404
+public/images/        # Λογότυπα & partner logos (σερβίρονται αυτούσια)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Πώς προσθέτω νέο έργο
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. Βάλε τις φωτογραφίες σε `src/assets/images/projects/<slug-εργου>/`
+   (μεγάλες φωτό OK — βελτιστοποιούνται αυτόματα στο build).
+2. Στο `src/data/projects.ts` πρόσθεσε ένα αντικείμενο στο array `projects`
+   με `slug`, `title`, `location`, `category`, `tags`, `description`,
+   `longDescription` και `gallery` με `img('<slug>/<αρχείο>.jpg')` ανά εικόνα.
+   - `imageFit: 'contain'` για screenshots εφαρμογών, `'cover'` για φωτογραφίες.
+   - Προαιρετικά `sections`/`specs` για αναλυτικό case study, ή
+     `status: 'in-progress'` για έργο σε εξέλιξη (δείχνει placeholder).
+3. Η σελίδα `/projects/<slug>/` δημιουργείται αυτόματα. Για να φαίνεται το
+   έργο και στην αρχική, πρόσθεσε το slug στο `featuredSlugs` του
+   `src/components/Projects.astro`.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Πώς προσθέτω νέο blog post
 
-## 🧞 Commands
+1. Αντίγραψε ένα υπάρχον αρχείο από `src/pages/blog/` (π.χ.
+   `ti-einai-to-knx.astro`) με νέο όνομα-slug.
+2. Ενημέρωσε `title`, `description`, `publishDate` και το περιεχόμενο.
+   Το `publishDate` παράγει αυτόματα το BlogPosting schema. Πέρασε και
+   `breadcrumbs` + προαιρετικά `ogImage` (δες το `prasino-spiti-knx.astro`).
+3. Πρόσθεσε το post στη λίστα `posts` του `src/pages/blog/index.astro`.
 
-All commands are run from the root of the project, from a terminal:
+## SEO
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Το `Layout.astro` παράγει αυτόματα: canonical, OG/Twitter meta,
+ProfessionalService schema (με sameAs σε Facebook/Instagram/Google Maps),
+BlogPosting (με `publishDate`), BreadcrumbList (με `breadcrumbs`) και
+sitemap (`@astrojs/sitemap`). Το άρθρο κόστους έχει επιπλέον FAQPage schema.
