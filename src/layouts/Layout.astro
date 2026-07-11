@@ -53,12 +53,28 @@ const blogPostingSchema = isArticle ? {
 const localBusinessSchema = {
 	"@context": "https://schema.org",
 	"@type": "ProfessionalService",
+	"@id": siteUrl + "/#business",
 	"name": "SmartHomePro",
 	"description": description,
 	"url": siteUrl,
 	"telephone": "+302102200607",
 	"email": "info@smarthomepro.gr",
 	"image": ogImage,
+	"logo": {
+		"@type": "ImageObject",
+		"url": siteUrl + "/images/SmartHomePro_Hor_B.png"
+	},
+	"openingHoursSpecification": {
+		"@type": "OpeningHoursSpecification",
+		"dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+		"opens": "09:00",
+		"closes": "17:00"
+	},
+	"sameAs": [
+		"https://www.facebook.com/smarthomepro.gr/",
+		"https://www.instagram.com/smarthomepro.gr/",
+		"https://maps.app.goo.gl/fc3hQA4pmtnAhWP26"
+	],
 	"areaServed": {
 		"@type": "State",
 		"name": "Αττική"
