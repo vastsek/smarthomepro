@@ -1,0 +1,76 @@
+---
+// Αρχείο: src/components/FAQ.astro
+// Ορατό FAQ accordion (details/summary — χωρίς JS) + FAQPage schema.
+// Οι απαντήσεις αντλούνται από τα άρθρα του blog — αν αλλάξουν εκεί, ενημέρωσε και εδώ.
+const faqs = [
+	{
+		question: 'Τι είναι το KNX;',
+		answer: 'Το KNX είναι το διεθνές, ανοιχτό πρότυπο για τον αυτοματισμό κατοικιών και κτιρίων. Δεν είναι προϊόν μιας εταιρείας· είναι μια κοινή «γλώσσα» που μιλούν συσκευές από περισσότερους από 500 κατασκευαστές, ώστε να συνεργάζονται μεταξύ τους απρόσκοπτα.',
+		link: { href: '/blog/ti-einai-to-knx/', label: 'Διαβάστε τον πλήρη οδηγό' },
+	},
+	{
+		question: 'Πόσο κοστίζει ένα έξυπνο σπίτι με KNX;',
+		answer: 'Δεν υπάρχει ένα σταθερό νούμερο — το κόστος εξαρτάται από το μέγεθος, το εύρος λειτουργιών και την πολυπλοκότητα των σεναρίων. Ενδεικτικά: διαμέρισμα ~80-100 τ.μ. με βασικό αυτοματισμό 8.000€-10.000€, μονοκατοικία ~150-200 τ.μ. με πλήρη αυτοματισμό 16.000€-20.000€, πολυτελής κατοικία 300+ τ.μ. 40.000€-50.000€.',
+		link: { href: '/blog/kostos-exypnou-spitiou-knx/', label: 'Δείτε τον αναλυτικό οδηγό κόστους' },
+	},
+	{
+		question: 'KNX ή ασύρματο έξυπνο σπίτι;',
+		answer: 'Για γρήγορες, μεμονωμένες λύσεις, το ασύρματο είναι μια χαρά. Για ένα μόνιμο, αξιόπιστο, ολοκληρωμένο σπίτι που θα σας εξυπηρετεί για δεκαετίες, το KNX παραμένει το πρότυπο αναφοράς — ενσύρματο, χωρίς εξάρτηση από cloud και κλειστά οικοσυστήματα.',
+		link: { href: '/blog/knx-vs-asyrmato/', label: 'Δείτε την αναλυτική σύγκριση' },
+	},
+	{
+		question: 'Λειτουργεί το σύστημα αν πέσει το internet;',
+		answer: 'Ναι. Το KNX λειτουργεί τοπικά: ακόμη κι αν πέσει το internet, τα φώτα, η θέρμανση και τα ρολά δουλεύουν κανονικά. Η νοημοσύνη είναι αποκεντρωμένη — δεν υπάρχει ένας κεντρικός «εγκέφαλος» που, αν χαλάσει, σταματάει όλο το σπίτι.',
+	},
+	{
+		question: 'Μπορεί να μπει KNX σε υπάρχουσα κατοικία ή ανακαίνιση;',
+		answer: 'Το KNX δίνει το καλύτερό του σε νέες κατασκευές και ριζικές ανακαινίσεις, όπου η καλωδίωση bus μπαίνει από την αρχή. Σε υπάρχουσες κατοικίες, λύσεις όπως το KNX RF (η ασύρματη έκδοση του προτύπου) κάνουν τον αυτοματισμό εφικτό χωρίς μεγάλες οικοδομικές εργασίες.',
+	},
+];
+
+const faqSchema = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	"mainEntity": faqs.map((f) => ({
+		"@type": "Question",
+		"name": f.question,
+		"acceptedAnswer": { "@type": "Answer", "text": f.answer },
+	})),
+};
+---
+
+<section id="faq" class="py-24 bg-white border-t border-slate-100">
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+	<div class="container mx-auto px-6 max-w-3xl">
+
+		<div class="text-center mb-12">
+			<span class="eyebrow">FAQ</span>
+			<h2 class="text-3xl md:text-4xl font-bold text-slate-900 mt-2">
+				Συχνές Ερωτήσεις
+			</h2>
+		</div>
+
+		<div class="space-y-4">
+			{faqs.map((f) => (
+				<details class="group bg-slate-50 border border-slate-100 rounded-xl open:bg-white open:shadow-sm transition-all">
+					<summary class="flex items-center justify-between gap-4 cursor-pointer list-none px-6 py-5 font-bold text-slate-900 [&::-webkit-details-marker]:hidden">
+						{f.question}
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 shrink-0 text-teal-600 transition-transform group-open:rotate-180" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+						</svg>
+					</summary>
+					<div class="px-6 pb-6 text-slate-600 leading-relaxed">
+						<p>{f.answer}</p>
+						{f.link && (
+							<a href={f.link.href} class="inline-block mt-3 text-teal-600 font-medium hover:underline">
+								{f.link.label} →
+							</a>
+						)}
+					</div>
+				</details>
+			))}
+		</div>
+
+	</div>
+</section>
