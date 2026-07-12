@@ -1,0 +1,139 @@
+---
+// Αρχείο: src/pages/ypiresies/astheni-revmata.astro
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+import ProjectPlaceholder from '../../components/ProjectPlaceholder.astro';
+
+const title = 'Ασθενή Ρεύματα: Δίκτυα, CCTV, Συναγερμοί & Θυροτηλεόραση';
+const description =
+	'Μελέτη και εγκατάσταση ασθενών συστημάτων στην Αθήνα και την Αττική: δομημένη καλωδίωση, δίκτυα & WiFi, κάμερες CCTV, συναγερμοί, έλεγχος πρόσβασης, πυρανίχνευση, θυροτηλεόραση και VoIP.';
+
+// Σχετικά έργα: τα μη-KNX (δίκτυα, CCTV) πρώτα.
+const relatedProjects = projects
+	.filter((p) => !p.tags.includes('KNX'))
+	.slice(0, 3);
+
+const serviceSchema = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"name": "Εγκατάσταση Ασθενών Συστημάτων",
+	"serviceType": "Low Voltage Systems Installation",
+	"description": description,
+	"provider": { "@id": "https://smarthomepro.gr/#business" },
+	"areaServed": { "@type": "State", "name": "Αττική" },
+	"url": new URL(Astro.url.pathname, "https://smarthomepro.gr").href,
+};
+---
+
+<Layout
+	title={`${title} | SmartHomePro`}
+	description={description}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Υπηρεσίες', url: '/#services' }, { name: 'Ασθενή Ρεύματα' }]}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+	<main class="pt-40 pb-24">
+		<div class="container mx-auto px-6 max-w-5xl">
+
+			<div class="max-w-3xl mb-16">
+				<span class="eyebrow">Υπηρεσίες</span>
+				<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mt-2 mb-6 leading-tight">
+					Ασθενή Ρεύματα &amp; Δικτυακές Υποδομές
+				</h1>
+				<p class="text-slate-600 text-lg leading-relaxed">
+					Πέρα από τα έργα KNX, αναλαμβάνουμε με τα ίδια υψηλά πρότυπα ποιότητας τον πλήρη
+					σχεδιασμό και την εγκατάσταση ασθενών συστημάτων για κατοικίες και επιχειρήσεις
+					στην Αθήνα και την Αττική — από τη δομημένη καλωδίωση και το δίκτυο μέχρι τις
+					κάμερες, τον συναγερμό και τη θυροτηλεόραση.
+				</p>
+			</div>
+
+			<div class="mb-16">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Τι αναλαμβάνουμε</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Δίκτυα &amp; Τηλεπικοινωνίες</h3>
+						<ul class="space-y-2 text-slate-600 leading-relaxed">
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Δομημένη καλωδίωση &amp; καμπίνες rack</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Δικτυακός εξοπλισμός &amp; WiFi</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Τηλεφωνικά κέντρα &amp; VoIP</li>
+						</ul>
+					</div>
+
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Ασφάλεια &amp; Παρακολούθηση</h3>
+						<ul class="space-y-2 text-slate-600 leading-relaxed">
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Συστήματα καμερών (CCTV)</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Συναγερμοί</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Έλεγχος πρόσβασης</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Πυρανίχνευση</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Θυροτηλεόραση</li>
+						</ul>
+					</div>
+
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<h3 class="text-xl font-bold text-slate-900 mb-4">Audio &amp; Video</h3>
+						<ul class="space-y-2 text-slate-600 leading-relaxed">
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Video streaming / IPTV (ξενοδοχεία)</li>
+							<li class="flex gap-2"><span class="text-teal-500">›</span> Multiroom audio &amp; home cinema</li>
+						</ul>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Γιατί μας εμπιστεύονται</h2>
+				<ul class="space-y-4 text-slate-700 text-lg">
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Μία ομάδα για όλα τα ασθενή:</strong> δίκτυο, κάμερες, συναγερμός και θυροτηλεόραση σχεδιάζονται μαζί — όχι από τρία διαφορετικά συνεργεία που δεν συνεννοούνται.</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Επαγγελματικός εξοπλισμός:</strong> δουλεύουμε με αξιόπιστες μάρκες όπως Ubiquiti, TP-Link Omada, Hikvision, Paradox, Yealink και Yeastar.</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Τεκμηρίωση &amp; τάξη:</strong> οργανωμένες καμπίνες rack, σημασμένες γραμμές και παράδοση με πλήρη τεκμηρίωση για εύκολη μελλοντική επέκταση.</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Έτοιμο για αυτοματισμό:</strong> αν αργότερα θελήσετε έξυπνο σπίτι, η υποδομή που παραδίδουμε ενσωματώνεται απευθείας σε σύστημα <a href="/ypiresies/meleti-egkatastasi-knx/" class="text-teal-600 font-medium hover:underline">KNX</a>.</span></li>
+				</ul>
+			</div>
+
+			{relatedProjects.length > 0 && (
+				<div class="mb-16">
+					<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Σχετικά έργα</h2>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						{relatedProjects.map((p) => (
+							<a href={`/projects/${p.slug}/`} class="group block">
+								<div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-4", p.gallery.length > 0 && p.imageFit === 'contain' ? 'flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black' : '']}>
+									{p.gallery.length === 0 ? (
+										<ProjectPlaceholder compact />
+									) : (
+										<Fragment>
+											{p.imageFit === 'contain' && (
+												<div class="absolute w-32 h-32 bg-teal-500/20 rounded-full blur-3xl"></div>
+											)}
+											<Image
+												src={p.gallery[0].src}
+												alt={p.title}
+												widths={[320, 480, 640]}
+												sizes="(min-width: 768px) 33vw, 100vw"
+												loading="lazy"
+												class:list={["transition-transform duration-700 group-hover:scale-110", p.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
+											/>
+										</Fragment>
+									)}
+								</div>
+								<h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{p.title}</h3>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+			<div class="p-8 bg-dark-glow rounded-xl text-center">
+				<h3 class="text-2xl font-bold text-white mb-3">Χρειάζεστε αξιόπιστη υποδομή ασθενών;</h3>
+				<p class="text-slate-300 mb-6">Πείτε μας τις ανάγκες του χώρου σας και θα σας προτείνουμε τη σωστή λύση.</p>
+				<a href="/#contact" class="inline-block px-8 py-4 bg-teal-600 text-white text-base font-medium rounded hover:bg-teal-500 transition-colors shadow-lg">
+					Ζητήστε Προσφορά
+				</a>
+			</div>
+
+		</div>
+	</main>
+</Layout>
