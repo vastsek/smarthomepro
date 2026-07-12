@@ -17,7 +17,29 @@
 
         <nav class="hidden lg:flex gap-8 items-center text-base font-medium text-slate-600">
             <a href="/" class="hover:text-teal-600 transition-colors">Αρχική</a>
-            <a href="/#services" class="hover:text-teal-600 transition-colors">Υπηρεσίες</a>
+
+            <div class="relative group">
+                <a href="/#services" class="hover:text-teal-600 transition-colors inline-flex items-center gap-1">
+                    Υπηρεσίες
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 mt-0.5 transition-transform group-hover:rotate-180" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                    </svg>
+                </a>
+                <!-- pt-3 γεφυρώνει το κενό ώστε να μη χάνεται το hover στη μετάβαση προς το μενού -->
+                <div class="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 transition-all duration-200">
+                    <div class="bg-white rounded-xl shadow-xl shadow-slate-900/10 border border-slate-100 py-2 w-72">
+                        <a href="/ypiresies/meleti-egkatastasi-knx/" class="block px-5 py-3 text-slate-700 hover:bg-slate-50 hover:text-teal-600 transition-colors">
+                            Μελέτη &amp; Εγκατάσταση KNX
+                            <span class="block text-xs text-slate-400 font-normal mt-0.5">Έξυπνο σπίτι για κατοικίες</span>
+                        </a>
+                        <a href="/ypiresies/astheni-revmata/" class="block px-5 py-3 text-slate-700 hover:bg-slate-50 hover:text-teal-600 transition-colors">
+                            Ασθενή Ρεύματα
+                            <span class="block text-xs text-slate-400 font-normal mt-0.5">Δίκτυα, CCTV, συναγερμοί</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <a href="/projects/" class="hover:text-teal-600 transition-colors">Έργα</a>
             <a href="/blog/" class="hover:text-teal-600 transition-colors">Blog</a>
             <a href="/#contact" class="hover:text-teal-600 transition-colors">Επικοινωνία</a>
@@ -42,6 +64,10 @@
         <nav class="flex flex-col items-center gap-6 text-center">
             <a href="/" class="mobile-link text-3xl font-bold text-slate-900 hover:text-teal-600">Αρχική</a>
             <a href="/#services" class="mobile-link text-3xl font-bold text-slate-900 hover:text-teal-600">Υπηρεσίες</a>
+            <div class="flex flex-col gap-3 -mt-2">
+                <a href="/ypiresies/meleti-egkatastasi-knx/" class="mobile-link text-lg font-medium text-slate-500 hover:text-teal-600">Μελέτη &amp; Εγκατάσταση KNX</a>
+                <a href="/ypiresies/astheni-revmata/" class="mobile-link text-lg font-medium text-slate-500 hover:text-teal-600">Ασθενή Ρεύματα</a>
+            </div>
             <a href="/projects/" class="mobile-link text-3xl font-bold text-slate-900 hover:text-teal-600">Έργα</a>
             <a href="/blog/" class="mobile-link text-3xl font-bold text-slate-900 hover:text-teal-600">Blog</a>
             <a href="/#contact" class="mobile-link text-3xl font-bold text-slate-900 hover:text-teal-600">Επικοινωνία</a>
