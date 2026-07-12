@@ -1,0 +1,160 @@
+---
+// Αρχείο: src/pages/ypiresies/meleti-egkatastasi-knx.astro
+import { Image } from 'astro:assets';
+import Layout from '../../layouts/Layout.astro';
+import { projects } from '../../data/projects';
+import ProjectPlaceholder from '../../components/ProjectPlaceholder.astro';
+
+const title = 'Μελέτη & Εγκατάσταση Έξυπνου Σπιτιού KNX';
+const description =
+	'Μελέτη, εγκατάσταση και προγραμματισμός συστημάτων KNX για κατοικίες στην Αθήνα και την Αττική, από πιστοποιημένο KNX Partner. Από τα ηλεκτρολογικά σχέδια μέχρι το commissioning και την υποστήριξη.';
+
+const relatedProjects = projects.filter((p) => p.tags.includes('KNX')).slice(0, 3);
+
+// Service schema: συνδέεται με την επιχείρηση μέσω του @id του Layout.
+const serviceSchema = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"name": title,
+	"serviceType": "KNX Home Automation",
+	"description": description,
+	"provider": { "@id": "https://smarthomepro.gr/#business" },
+	"areaServed": { "@type": "State", "name": "Αττική" },
+	"url": new URL(Astro.url.pathname, "https://smarthomepro.gr").href,
+};
+---
+
+<Layout
+	title={`${title} | SmartHomePro`}
+	description={description}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Υπηρεσίες', url: '/#services' }, { name: 'Μελέτη & Εγκατάσταση KNX' }]}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+	<main class="pt-40 pb-24">
+		<div class="container mx-auto px-6 max-w-5xl">
+
+			<div class="max-w-3xl mb-16">
+				<span class="eyebrow">Υπηρεσίες</span>
+				<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mt-2 mb-6 leading-tight">
+					Μελέτη &amp; Εγκατάσταση Έξυπνου Σπιτιού KNX
+				</h1>
+				<p class="text-slate-600 text-lg leading-relaxed">
+					Σχεδιάζουμε και υλοποιούμε ολοκληρωμένα συστήματα αυτοματισμού KNX για κατοικίες
+					στην Αθήνα και την Αττική — από τα ηλεκτρολογικά σχέδια μέχρι το τελικό commissioning.
+					Ως πιστοποιημένος <strong class="text-slate-900">KNX Partner</strong>, παραδίδουμε ένα
+					σπίτι που ελέγχεται πανεύκολα και λειτουργεί αξιόπιστα για δεκαετίες.
+				</p>
+			</div>
+
+			<div class="mb-16">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Πώς δουλεύουμε</h2>
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<div class="text-teal-600 font-bold text-sm mb-3">ΒΗΜΑ 1</div>
+						<h3 class="text-xl font-bold text-slate-900 mb-3">Μελέτη &amp; Σχεδιασμός</h3>
+						<p class="text-slate-600 leading-relaxed">
+							Σχεδιάζουμε το έξυπνο σπίτι προσαρμοσμένο ακριβώς στον τρόπο ζωής της οικογένειας.
+							Αναλύουμε τα ηλεκτρολογικά σχέδια και προτείνουμε σενάρια φωτισμού, θέρμανσης και
+							ασφάλειας που προσφέρουν πραγματική άνεση.
+						</p>
+					</div>
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<div class="text-teal-600 font-bold text-sm mb-3">ΒΗΜΑ 2</div>
+						<h3 class="text-xl font-bold text-slate-900 mb-3">Εγκατάσταση &amp; Προγραμματισμός</h3>
+						<p class="text-slate-600 leading-relaxed">
+							Υλοποιούμε το σύστημα KNX με κορυφαία υλικά και το παραμετροποιούμε στο ETS.
+							Παραδίδουμε ένα σπίτι που ελέγχεται από οθόνες αφής, tablet και smartphone
+							(iPhone &amp; Android), ακόμα και όταν λείπετε.
+						</p>
+					</div>
+					<div class="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+						<div class="text-teal-600 font-bold text-sm mb-3">ΒΗΜΑ 3</div>
+						<h3 class="text-xl font-bold text-slate-900 mb-3">Υποστήριξη &amp; Επέκταση</h3>
+						<p class="text-slate-600 leading-relaxed">
+							Δεν εξαφανιζόμαστε μετά την παράδοση. Παρέχουμε εγγύηση καλής λειτουργίας και
+							άμεση τεχνική υποστήριξη. Το σύστημά σας μπορεί να επεκταθεί όποτε το θελήσετε.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Τι μπορεί να ελέγξει το σύστημα</h2>
+				<p class="text-slate-600 text-lg leading-relaxed mb-6">
+					Ενοποιούμε όλα τα συστήματα του σπιτιού σε μία πλατφόρμα, με έλεγχο από ένα σημείο:
+				</p>
+				<ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-slate-700">
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Φωτισμός — DALI, σενάρια, Human Centric Lighting</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Θέρμανση &amp; ψύξη ανά ζώνη (ενδοδαπέδια, VRV, fan coils)</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Ρολά &amp; κουρτίνες με αυτοματισμό βάσει ήλιου</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Ασφάλεια, κάμερες &amp; έλεγχος πρόσβασης</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Multiroom audio &amp; home cinema</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Φωνητικός έλεγχος (Siri, Alexa, Google)</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Πισίνα, πότισμα &amp; γκαραζόπορτα</li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> Ενεργειακή παρακολούθηση σε πραγματικό χρόνο</li>
+				</ul>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Για αρχιτέκτονες &amp; μηχανικούς</h2>
+				<p class="text-slate-600 text-lg leading-relaxed">
+					Δεν αντικαθιστούμε τον μελετητή — τον καθοδηγούμε. Υποστηρίζουμε τον μελετητή σας στον
+					σχεδιασμό του συστήματος KNX και παραδίδουμε το διάγραμμα συνδέσεων του εξοπλισμού,
+					ώστε ο εγκαταστάτης να δουλέψει με ακρίβεια. Από τη χάραξη των σωληνώσεων μέχρι το
+					commissioning, διασφαλίζουμε ότι το έργο θα παραδοθεί σωστά και στην ώρα του.
+				</p>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Χρήσιμα άρθρα πριν ξεκινήσετε</h2>
+				<ul class="space-y-3 text-lg">
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <a href="/blog/ti-einai-to-knx/" class="text-teal-600 font-medium hover:underline">Τι είναι το KNX; Ο πλήρης οδηγός</a></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <a href="/blog/kostos-exypnou-spitiou-knx/" class="text-teal-600 font-medium hover:underline">Πόσο κοστίζει ένα έξυπνο σπίτι με KNX;</a></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <a href="/blog/knx-vs-asyrmato/" class="text-teal-600 font-medium hover:underline">KNX ή ασύρματο έξυπνο σπίτι;</a></li>
+				</ul>
+			</div>
+
+			{relatedProjects.length > 0 && (
+				<div class="mb-16">
+					<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Έργα KNX που έχουμε υλοποιήσει</h2>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						{relatedProjects.map((p) => (
+							<a href={`/projects/${p.slug}/`} class="group block">
+								<div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-4", p.gallery.length > 0 && p.imageFit === 'contain' ? 'flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black' : '']}>
+									{p.gallery.length === 0 ? (
+										<ProjectPlaceholder compact />
+									) : (
+										<Fragment>
+											{p.imageFit === 'contain' && (
+												<div class="absolute w-32 h-32 bg-teal-500/20 rounded-full blur-3xl"></div>
+											)}
+											<Image
+												src={p.gallery[0].src}
+												alt={p.title}
+												widths={[320, 480, 640]}
+												sizes="(min-width: 768px) 33vw, 100vw"
+												loading="lazy"
+												class:list={["transition-transform duration-700 group-hover:scale-110", p.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
+											/>
+										</Fragment>
+									)}
+								</div>
+								<h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{p.title}</h3>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+			<div class="p-8 bg-dark-glow rounded-xl text-center">
+				<h3 class="text-2xl font-bold text-white mb-3">Ξεκινήστε με μια δωρεάν αρχική συζήτηση</h3>
+				<p class="text-slate-300 mb-6">Πείτε μας για το έργο σας και θα σας προτείνουμε τη σωστή λύση — με ειλικρίνεια.</p>
+				<a href="/#contact" class="inline-block px-8 py-4 bg-teal-600 text-white text-base font-medium rounded hover:bg-teal-500 transition-colors shadow-lg">
+					Ζητήστε Μελέτη
+				</a>
+			</div>
+
+		</div>
+	</main>
+</Layout>
