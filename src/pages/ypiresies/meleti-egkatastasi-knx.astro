@@ -7,9 +7,14 @@ import ProjectPlaceholder from '../../components/ProjectPlaceholder.astro';
 
 const title = 'Μελέτη & Εγκατάσταση Έξυπνου Σπιτιού KNX';
 const description =
-	'Μελέτη, εγκατάσταση και προγραμματισμός συστημάτων KNX για κατοικίες στην Αθήνα και την Αττική, από πιστοποιημένο KNX Partner. Από τα ηλεκτρολογικά σχέδια μέχρι το commissioning και την υποστήριξη.';
+	'Μελέτη, εγκατάσταση και προγραμματισμός συστημάτων KNX για κατοικίες και επαγγελματικούς χώρους στην Αθήνα και την Αττική, από πιστοποιημένο KNX Partner. Από τα ηλεκτρολογικά σχέδια μέχρι το commissioning και την υποστήριξη.';
 
-const relatedProjects = projects.filter((p) => p.tags.includes('KNX')).slice(0, 3);
+// Επιλεγμένα έργα KNX: δύο κατοικίες + ένας επαγγελματικός χώρος,
+// ώστε να φαίνεται ότι καλύπτουμε και τα δύο.
+const relatedSlugs = ['monokatoikia-filothei', 'katoikia-glyfada', 'grafeia-ag-dimitrios'];
+const relatedProjects = relatedSlugs
+	.map((slug) => projects.find((p) => p.slug === slug))
+	.filter((p) => p !== undefined);
 
 // Service schema: συνδέεται με την επιχείρηση μέσω του @id του Layout.
 const serviceSchema = {
@@ -41,9 +46,10 @@ const serviceSchema = {
 				</h1>
 				<p class="text-slate-600 text-lg leading-relaxed">
 					Σχεδιάζουμε και υλοποιούμε ολοκληρωμένα συστήματα αυτοματισμού KNX για κατοικίες
-					στην Αθήνα και την Αττική — από τα ηλεκτρολογικά σχέδια μέχρι το τελικό commissioning.
-					Ως πιστοποιημένος <strong class="text-slate-900">KNX Partner</strong>, παραδίδουμε ένα
-					σπίτι που ελέγχεται πανεύκολα και λειτουργεί αξιόπιστα για δεκαετίες.
+					και επαγγελματικούς χώρους στην Αθήνα και την Αττική — από τα ηλεκτρολογικά σχέδια
+					μέχρι το τελικό commissioning. Ως πιστοποιημένος
+					<strong class="text-slate-900">KNX Partner</strong>, παραδίδουμε ένα σύστημα που
+					ελέγχεται πανεύκολα και λειτουργεί αξιόπιστα για δεκαετίες.
 				</p>
 			</div>
 
