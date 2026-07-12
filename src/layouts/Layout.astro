@@ -131,6 +131,9 @@ const localBusinessSchema = {
         <meta name="twitter:description" content={description} />
         <meta name="twitter:image" content={ogImage} />
 
+        <!-- Umami analytics: privacy-friendly, χωρίς cookies — δεν απαιτεί consent banner -->
+        <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="e05f64ac-da42-4a3a-ab93-6f9ac61439b0"></script>
+
         <!-- Structured data: βοηθάει τη Google να καταλάβει επιχείρηση/τοποθεσία/υπηρεσίες -->
         <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
         {blogPostingSchema && (
