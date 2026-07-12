@@ -1,0 +1,165 @@
+---
+// Αρχείο: src/pages/synergates.astro
+// B2B σελίδα για αρχιτέκτονες, μηχανικούς & κατασκευαστές.
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import { projects } from '../data/projects';
+import ProjectPlaceholder from '../components/ProjectPlaceholder.astro';
+
+const title = 'Συνεργάτες: Αρχιτέκτονες, Μηχανικοί & Κατασκευαστές';
+const description =
+	'Τεχνικός συνεργάτης για αρχιτέκτονες, μηχανικούς και κατασκευαστές στην Αθήνα και την Αττική: μελέτη KNX, διάγραμμα συνδέσεων, επίβλεψη, commissioning και τεκμηρίωση — με σαφή παραδοτέα σε κάθε φάση του έργου.';
+
+const phases = [
+	{
+		title: 'Concept & Προμελέτη',
+		text: 'Διαβάζουμε τα αρχιτεκτονικά σχέδια και προτείνουμε τι αξίζει να αυτοματοποιηθεί για τον συγκεκριμένο πελάτη: σενάρια φωτισμού, θέρμανση ανά ζώνη, σκίαση, ασφάλεια. Εσείς κρατάτε τον έλεγχο της αισθητικής — εμείς φροντίζουμε να τη σέβεται η τεχνολογία.',
+	},
+	{
+		title: 'Μελέτη & Σχέδια',
+		text: 'Δεν αντικαθιστούμε τον μελετητή σας — τον καθοδηγούμε. Παραδίδουμε το διάγραμμα συνδέσεων του εξοπλισμού KNX και τη χάραξη των γραμμών, ώστε ο ηλεκτρολόγος να δουλέψει με ακρίβεια, χωρίς αυτοσχεδιασμούς στο εργοτάξιο.',
+	},
+	{
+		title: 'Κατασκευή & Επίβλεψη',
+		text: 'Είμαστε διαθέσιμοι στις κρίσιμες στιγμές της καλωδίωσης και συντονιζόμαστε με τα υπόλοιπα συνεργεία (HVAC, ηλεκτρολόγος, υδραυλικός), ώστε να μη βρεθείτε μπροστά σε «δεν το ήξερα» όταν κλείσουν οι τοίχοι.',
+	},
+	{
+		title: 'Προγραμματισμός & Παράδοση',
+		text: 'Παραμετροποίηση στο ETS, σενάρια, οθόνες και apps. Παραδίδουμε οργανωμένο, πλήρως τεκμηριωμένο πίνακα αυτοματισμού — και εκπαιδεύουμε τον ιδιοκτήτη στη χρήση.',
+	},
+	{
+		title: 'Μετά την παράδοση',
+		text: 'Εγγύηση καλής λειτουργίας, απομακρυσμένη υποστήριξη και δυνατότητα επέκτασης. Ο πελάτης σας μένει ευχαριστημένος — και θυμάται ποιος του σύστησε τη λύση.',
+	},
+];
+
+// Επιλεγμένα έργα για το B2B κοινό.
+const relatedSlugs = ['katoikia-glyfada', 'monokatoikia-filothei', 'ypersyghroni-katoikia-600'];
+const relatedProjects = relatedSlugs
+	.map((slug) => projects.find((p) => p.slug === slug))
+	.filter((p) => p !== undefined);
+
+const serviceSchema = {
+	"@context": "https://schema.org",
+	"@type": "Service",
+	"name": "Τεχνικός Συνεργάτης Αυτοματισμού για Αρχιτέκτονες & Κατασκευαστές",
+	"serviceType": "KNX Design & Integration Partnership",
+	"description": description,
+	"provider": { "@id": "https://smarthomepro.gr/#business" },
+	"areaServed": { "@type": "State", "name": "Αττική" },
+	"url": new URL(Astro.url.pathname, "https://smarthomepro.gr").href,
+};
+---
+
+<Layout
+	title={`${title} | SmartHomePro`}
+	description={description}
+	breadcrumbs={[{ name: 'Αρχική', url: '/' }, { name: 'Συνεργάτες' }]}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+	<main class="pt-40 pb-24">
+		<div class="container mx-auto px-6 max-w-5xl">
+
+			<div class="max-w-3xl mb-16">
+				<span class="eyebrow">Για Αρχιτέκτονες, Μηχανικούς &amp; Κατασκευαστές</span>
+				<h1 class="text-3xl md:text-5xl font-bold text-slate-900 mt-2 mb-6 leading-tight">
+					Ο τεχνικός συνεργάτης του γραφείου σας
+				</h1>
+				<p class="text-slate-600 text-lg leading-relaxed">
+					Αναλαμβάνουμε το κομμάτι του έργου που δεν θέλετε να σας απασχολεί: τον αυτοματισμό.
+					Από την προμελέτη μέχρι το commissioning, δουλεύουμε δίπλα στον μελετητή και τον
+					εργολάβο σας — με σαφή παραδοτέα σε κάθε φάση, ώστε το έργο να παραδοθεί σωστά και
+					στην ώρα του. Πιστοποιημένος <strong class="text-slate-900">KNX Partner από το 2006</strong>.
+				</p>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Πώς δουλεύουμε μαζί, φάση-φάση</h2>
+				<ol class="space-y-8">
+					{phases.map((phase, i) => (
+						<li class="flex gap-5">
+							<div class="shrink-0 w-10 h-10 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center">
+								{i + 1}
+							</div>
+							<div>
+								<h3 class="text-xl font-bold text-slate-900 mb-2">{phase.title}</h3>
+								<p class="text-slate-600 leading-relaxed">{phase.text}</p>
+							</div>
+						</li>
+					))}
+				</ol>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Γιατί οι αρχιτέκτονες μας επιλέγουν</h2>
+				<ul class="space-y-4 text-slate-700 text-lg">
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Design χωρίς συμβιβασμούς</strong> — ένα κομψό KNX keypad αντικαθιστά έως και 8 συμβατικούς διακόπτες</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Ένα πρότυπο, όχι δέσμευση σε μάρκα</strong> — KNX: 500+ κατασκευαστές, ελευθερία επιλογής υλικών που ταιριάζουν στο design σας</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Καθαρά παραδοτέα</strong> — σχέδια, διαγράμματα και τεκμηρίωση, όχι προφορικές συνεννοήσεις</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Όλα τα ασθενή από μία ομάδα</strong> — δίκτυα, κάμερες, συναγερμός, θυροτηλεόραση, μαζί με τον αυτοματισμό</span></li>
+				</ul>
+			</div>
+
+			<div class="mb-16 max-w-3xl">
+				<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">Για κατασκευαστές &amp; developers</h2>
+				<p class="text-slate-600 text-lg leading-relaxed mb-6">
+					Σε ένα ακίνητο προς πώληση, ο αυτοματισμός δεν είναι πολυτέλεια — είναι
+					<strong class="text-slate-900">επιχείρημα πώλησης</strong>. Ένα σπίτι με υποδομή KNX
+					ξεχωρίζει στις αγγελίες, δικαιολογεί υψηλότερη τιμή και απευθύνεται σε αγοραστές που
+					συγκρίνουν premium ακίνητα.
+				</p>
+				<ul class="space-y-4 text-slate-700 text-lg">
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Τυποποίηση σε πολλαπλές μονάδες</strong> — ίδια μελέτη και υλικά σε κάθε διαμέρισμα, οικονομία κλίμακας στην υλοποίηση</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Ευέλικτα πακέτα ανά μονάδα</strong> — βασική υποδομή παντού, με δυνατότητα αναβάθμισης ανά αγοραστή: ο καθένας «χτίζει» το δικό του επίπεδο αυτοματισμού πάνω στην ίδια καλωδίωση</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Πλήρης τεκμηρίωση ανά μονάδα</strong> — κάθε ιδιοκτήτης παραλαμβάνει το δικό του πακέτο σχεδίων και τεκμηρίωσης</span></li>
+					<li class="flex gap-3"><span class="text-teal-500 mt-1">›</span> <span><strong class="text-slate-900">Ένας υπεύθυνος για όλα τα ασθενή</strong> — αυτοματισμός, δίκτυα, θυροτηλεοράσεις και κάμερες κοινόχρηστων χώρων από μία ομάδα</span></li>
+				</ul>
+			</div>
+
+			{relatedProjects.length > 0 && (
+				<div class="mb-16">
+					<h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Έργα που μιλούν μόνα τους</h2>
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						{relatedProjects.map((p) => (
+							<a href={`/projects/${p.slug}/`} class="group block">
+								<div class:list={["relative overflow-hidden rounded-xl aspect-[4/3] mb-4", p.gallery.length > 0 && p.imageFit === 'contain' ? 'flex items-center justify-center bg-gradient-to-br from-slate-800 via-slate-900 to-black' : '']}>
+									{p.gallery.length === 0 ? (
+										<ProjectPlaceholder compact />
+									) : (
+										<Fragment>
+											{p.imageFit === 'contain' && (
+												<div class="absolute w-32 h-32 bg-teal-500/20 rounded-full blur-3xl"></div>
+											)}
+											<Image
+												src={p.gallery[0].src}
+												alt={p.title}
+												widths={[320, 480, 640]}
+												sizes="(min-width: 768px) 33vw, 100vw"
+												loading="lazy"
+												class:list={["transition-transform duration-700 group-hover:scale-110", p.imageFit === 'contain' ? 'relative h-[85%] w-auto max-w-[80%] object-contain rounded-xl shadow-2xl ring-1 ring-white/10' : 'w-full h-full object-cover']}
+											/>
+										</Fragment>
+									)}
+								</div>
+								<h3 class="font-bold text-slate-900 group-hover:text-teal-600 transition-colors">{p.title}</h3>
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+
+			<div class="p-8 md:p-10 bg-dark-glow rounded-xl text-center">
+				<h3 class="text-2xl font-bold text-white mb-3">Έχετε έργο στα σκαριά;</h3>
+				<p class="text-slate-300 mb-6 max-w-2xl mx-auto">
+					Στείλτε μας την κάτοψη για μια πρώτη, μη δεσμευτική εκτίμηση του αυτοματισμού —
+					θα σας πούμε τι προτείνουμε και τι κοστίζει, πριν δεσμευτείτε οπουδήποτε.
+				</p>
+				<a href="/#contact" class="inline-block px-8 py-4 bg-teal-600 text-white text-base font-medium rounded hover:bg-teal-500 transition-colors shadow-lg">
+					Στείλτε μας την κάτοψη
+				</a>
+			</div>
+
+		</div>
+	</main>
+</Layout>
