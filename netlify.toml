@@ -5,9 +5,10 @@
 # προστεθεί ως domain aliases στο ίδιο Netlify site (Domain management →
 # Add domain alias) και τα DNS web records του παλιού domain δείχνουν στο Netlify.
 #
-# Mapping παλιών σελίδων → νέων:
-#   /smart-home/  → αρχική (ενότητα υπηρεσιών)
-#   /services/    → αρχική (ενότητα υπηρεσιών)
+# Mapping παλιών σελίδων → νέων (1-προς-1 όπου υπάρχει αντίστοιχη σελίδα,
+# όπως συνιστά το εργαλείο Change of Address του Search Console):
+#   /smart-home/  → /ypiresies/meleti-egkatastasi-knx/
+#   /services/    → /ypiresies/meleti-egkatastasi-knx/
 #   /projects/    → /projects/
 #   /about/       → αρχική (ενότητα επικοινωνίας)
 #   οτιδήποτε άλλο → αρχική
@@ -16,13 +17,13 @@
 
 [[redirects]]
   from = "https://bitautomations.gr/smart-home/*"
-  to = "https://smarthomepro.gr/#services"
+  to = "https://smarthomepro.gr/ypiresies/meleti-egkatastasi-knx/"
   status = 301
   force = true
 
 [[redirects]]
   from = "https://bitautomations.gr/services/*"
-  to = "https://smarthomepro.gr/#services"
+  to = "https://smarthomepro.gr/ypiresies/meleti-egkatastasi-knx/"
   status = 301
   force = true
 
@@ -48,13 +49,13 @@
 
 [[redirects]]
   from = "https://www.bitautomations.gr/smart-home/*"
-  to = "https://smarthomepro.gr/#services"
+  to = "https://smarthomepro.gr/ypiresies/meleti-egkatastasi-knx/"
   status = 301
   force = true
 
 [[redirects]]
   from = "https://www.bitautomations.gr/services/*"
-  to = "https://smarthomepro.gr/#services"
+  to = "https://smarthomepro.gr/ypiresies/meleti-egkatastasi-knx/"
   status = 301
   force = true
 
