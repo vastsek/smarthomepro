@@ -1,4 +1,18 @@
 # Netlify configuration
+
+# --- Security headers (για όλες τις σελίδες) ---
+# Χωρίς CSP προς το παρόν: θα απαιτούσε προσεκτικό allowlisting (Umami, inline
+# styles του Astro) και το όφελος σε static site είναι μικρό σε σχέση με το ρίσκο.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+    Strict-Transport-Security = "max-age=31536000"
+
 #
 # 301 redirects για τη μετάβαση από το παλιό brand/site (bitautomations.gr)
 # στο smarthomepro.gr. Προϋπόθεση: το bitautomations.gr (και το www) έχουν
