@@ -72,6 +72,7 @@
                     name="contact"
                     method="POST"
                     action="/efxaristoume/"
+                    enctype="multipart/form-data"
                     data-netlify="true"
                     netlify-honeypot="bot-field"
                     class="space-y-6"
@@ -83,7 +84,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-slate-700 mb-2">Ονοματεπώνυμο</label>
-                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all" placeholder="π.χ. Γιώργος Παπαδόπουλος" />
+                            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all" placeholder="Το ονοματεπώνυμό σας" />
                         </div>
                         <div>
                             <label for="phone" class="block text-sm font-medium text-slate-700 mb-2">Τηλέφωνο</label>
@@ -111,6 +112,18 @@
                         <textarea id="message" name="message" rows="4" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-teal-500 focus:ring-2 focus:ring-teal-200 outline-none transition-all" placeholder="Περιγράψτε μας σύντομα τις ανάγκες σας..."></textarea>
                     </div>
 
+                    <div>
+                        <label for="katopsi" class="block text-sm font-medium text-slate-700 mb-2">Κάτοψη ή σχέδιο <span class="text-slate-400 font-normal">(προαιρετικά)</span></label>
+                        <input
+                            type="file"
+                            id="katopsi"
+                            name="katopsi"
+                            accept=".pdf,.jpg,.jpeg,.png,.webp"
+                            class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:bg-teal-50 file:text-teal-700 file:font-medium file:cursor-pointer hover:file:bg-teal-100 file:transition-colors"
+                        />
+                        <p class="text-xs text-slate-400 mt-2">PDF ή εικόνα, έως 8MB — μας βοηθά να σας δώσουμε πιο συγκεκριμένη εκτίμηση.</p>
+                    </div>
+
                     <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-bold py-4 rounded-lg hover:from-emerald-400 hover:to-teal-500 transition-all shadow-lg shadow-teal-600/20">
                         Αποστολή Μηνύματος
                     </button>
@@ -120,3 +133,13 @@
         </div>
     </div>
 </section>
+
+<script>
+    // Προεπιλογή του «Ενδιαφέρομαι για» όταν ο επισκέπτης έρχεται από στοχευμένο
+    // link (π.χ. το CTA της σελίδας συνεργατών: /?type=synergasia#contact).
+    const typeParam = new URLSearchParams(window.location.search).get('type');
+    if (typeParam === 'synergasia') {
+        const select = document.getElementById('type') as HTMLSelectElement | null;
+        if (select) select.value = 'Συνεργασία (Αρχιτέκτονας/Μηχανικός)';
+    }
+</script>
